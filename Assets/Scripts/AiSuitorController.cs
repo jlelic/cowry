@@ -17,8 +17,9 @@ public class AiSuitorController : AbstractCowController
         if(targetPoint != null)
         {
             var targetPositon2d = Utils.V3toV2(targetPoint.transform.position);
-            if (Vector2.Distance(position2d, targetPositon2d) < 0.2f)
+            if (Vector2.Distance(position2d, targetPositon2d) < 0.25f)
             {
+                TargetVelocity = Vector2.zero;
                 if(navigatingToDoor)
                 {
                     // TODO GAME OVER
@@ -68,7 +69,8 @@ public class AiSuitorController : AbstractCowController
         var targetPosition2d = new Vector2(target.position.x, target.position.y);
         var direction = targetPosition2d - position2d;
         var distance = Vector2.Distance(targetPosition2d, position2d);
-        var hit = Physics2D.Raycast(position2d, direction, distance);
+        var mask = new LayerMask();
+        var hit = Physics2D.Raycast(position2d, direction, distance, (1 << 9)-1);
         Debug.DrawRay(position2d, direction * distance, Color.blue, 1, false);
         return hit.collider == null;
     }

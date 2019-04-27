@@ -13,22 +13,40 @@ public class GameManager : MonoBehaviour
     public HashSet<GameObject> GrassList { get; private set; } = new HashSet<GameObject>();
     public HashSet<GameObject> NavPointList { get; private set; } = new HashSet<GameObject>();
     public HashSet<GameObject> DoorEntranceList { get; private set; } = new HashSet<GameObject>();
+    public List<GameObject> SpawnPointList { get; private set; } = new List<GameObject>();
 
     [SerializeField] private GameObject grassPrefab;
+    [SerializeField] private GameObject suitorPrefab;
     [SerializeField] private float grassSpawnInterval = 10;
+    [SerializeField] private float suitorsSpawnInterval = 3;
 
 
     Coroutine spawnGrassCoroutine;
+    Coroutine spawnSuitorsCoroutine;
 
     private void Awake()
     {
         GameManager.Instance = this;
         spawnGrassCoroutine = StartCoroutine(StartSpawnGrass());
+        spawnSuitorsCoroutine = StartCoroutine(StartSpawnSuitors());
+    }
+
+    IEnumerator StartSpawnSuitors()
+    {
+        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+            Debug.Log(SpawnPointList.Count); ;
+            var spawnPoint = SpawnPointList[(int)(Random.value * SpawnPointList.Count)];
+            Instantiate(suitorPrefab);
+            suitorPrefab.transform.position = spawnPoint.transform.position;
+            yield return new WaitForSeconds(suitorsSpawnInterval);
+        }
     }
 
     IEnumerator StartSpawnGrass()
     {
-        while(true)
+        while (true)
         {
             SpawnGrass();
             yield return new WaitForSeconds(grassSpawnInterval);
