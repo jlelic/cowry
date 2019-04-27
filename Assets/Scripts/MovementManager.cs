@@ -4,12 +4,15 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
 
-    public bool IsCharging { get; private set; }
+    public bool CanCharge { get; private set; } = true;
+    public bool IsCharging { get; private set; } = false;
     public bool CanMove = true;
     private AbstractController controller;
     public float Speed = 90f;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    [SerializeField] private float chargeDuration = 0.45f;
+    [SerializeField] private float chargeCooldown = 0.2f;
     [SerializeField] private ParticleSystem[] chargeParticles;
 
     void Awake()
@@ -30,7 +33,7 @@ public class MovementManager : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }
-        if(controller.Charge)
+        if(controller.Charge && CanCharge)
         {
             StartCoroutine(Charging());
         }
@@ -52,7 +55,6 @@ public class MovementManager : MonoBehaviour
 
     IEnumerator Charging()
     {
-        var chargingTime = 0.45f;
         var strechBase = 7/8f;
         var strechScale = 15/56f;
         var velocityNorm = rigidBody.velocity.normalized;
@@ -74,12 +76,15 @@ public class MovementManager : MonoBehaviour
             particleSystem.Play();
         }
         IsCharging = true;
-        yield return new WaitForSeconds(chargingTime);
+        CanCharge = false;
+        yield return new WaitForSeconds(chargeDuration);
         transform.localScale = oldScale;
         foreach (var particleSystem in chargeParticles)
         {
             particleSystem.Stop();
         }
         IsCharging = false;
+        yield return new WaitForSeconds(chargeCooldown);
+        CanCharge = true;
     }
 }
