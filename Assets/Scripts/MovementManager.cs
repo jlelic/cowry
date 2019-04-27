@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
+
     public bool IsCharging { get; private set; }
     public bool CanMove = true;
     private AbstractController controller;
     public float Speed = 90f;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    [SerializeField] private ParticleSystem[] chargeParticles;
 
     void Awake()
     {
@@ -19,13 +21,14 @@ public class MovementManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        var scale = transform.localScale;
         if (controller.TargetVelocity.x > 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-Mathf.Abs(scale.x), scale.y, scale.z);
         }
         if (controller.TargetVelocity.x < 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }
         if(controller.Charge)
         {
@@ -49,8 +52,34 @@ public class MovementManager : MonoBehaviour
 
     IEnumerator Charging()
     {
+        var chargingTime = 0.45f;
+        var strechBase = 7/8f;
+        var strechScale = 15/56f;
+        var velocityNorm = rigidBody.velocity.normalized;
+        var stretchX = strechBase + Mathf.Abs(velocityNorm.x) *strechScale;
+        var stretchY = strechBase + Mathf.Abs(velocityNorm.y) * strechScale;
+        var oldScale = transform.localScale;
+        iTween.ScaleBy(gameObject, iTween.Hash(
+             "amount", new Vector3(stretchX/stretchY, stretchY / stretchX, 1),
+             "time", 0.08f,
+             "delay", 0
+        ));
+        iTween.ScaleBy(gameObject, iTween.Hash(
+             "amount", new Vector3(stretchY/ stretchX, stretchX / stretchY, 1),
+             "time", 0.15f,
+             "delay", 0.3f
+        ));
+        foreach(var particleSystem in chargeParticles)
+        {
+            particleSystem.Play();
+        }
         IsCharging = true;
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(chargingTime);
+        transform.localScale = oldScale;
+        foreach (var particleSystem in chargeParticles)
+        {
+            particleSystem.Stop();
+        }
         IsCharging = false;
     }
 }

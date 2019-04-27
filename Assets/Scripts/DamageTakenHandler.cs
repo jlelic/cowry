@@ -17,15 +17,25 @@ public class DamageTakenHandler : MonoBehaviour
         var enemyMovement = collision.collider.GetComponent<MovementManager>();
         if (enemyMovement!=null && enemyMovement.IsCharging)
         {
-            InvokeAllListeners();
+            OnDamageTaken();
         }
     }
 
-    private void InvokeAllListeners()
+    private void OnDamageTaken()
     {
+        StartCoroutine(DamageTakenSlowMo());
         foreach(var action in listeners)
         {
             action();
         }
+    }
+
+    IEnumerator DamageTakenSlowMo()
+    {
+        Time.timeScale = 0.05f;
+        //yield return new WaitForSecondsRealtime(0.08f);
+        //Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(0.08f);
+        Time.timeScale = 1f;
     }
 }
