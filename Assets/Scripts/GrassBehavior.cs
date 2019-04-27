@@ -8,7 +8,7 @@ public class GrassBehavior : MonoBehaviour
     private Color baseColor = Color.black;
     private SpriteRenderer renderer;
 
-    void Awake()
+    void Start()
     {
         // grow
         transform.localScale = new Vector3(0, 0, 0);

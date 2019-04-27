@@ -5,9 +5,13 @@ using UnityEngine;
 public abstract class AbstractCowController : AbstractController
 {
     public bool Eat { get; protected set; } = false;
+    public Vector2 LastVelocity { get; private set; } = Vector2.zero;
 
-    protected void FixedUpdate()
+
+    override protected void FixedUpdate()
     {
+        base.FixedUpdate();
         Eat = false;
+        LastVelocity = rigidBody.velocity;
     }
 }

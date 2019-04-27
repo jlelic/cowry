@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public HashSet<GameObject> GrassList { get; private set; } = new HashSet<GameObject>();
+    public HashSet<GameObject> NavPointList { get; private set; } = new HashSet<GameObject>();
+    public HashSet<GameObject> DoorEntranceList { get; private set; } = new HashSet<GameObject>();
 
     [SerializeField] private GameObject grassPrefab;
     [SerializeField] private float grassSpawnInterval = 10;
@@ -22,12 +24,6 @@ public class GameManager : MonoBehaviour
     {
         GameManager.Instance = this;
         spawnGrassCoroutine = StartCoroutine(StartSpawnGrass());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator StartSpawnGrass()

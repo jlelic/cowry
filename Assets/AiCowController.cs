@@ -30,7 +30,7 @@ public class AiCowController : AbstractCowController
         manager = GetComponent<CowManager>();
     }
 
-    void FixedUpdate()
+    override protected void FixedUpdate()
     {
         timeInCurrentState += Time.deltaTime;
 
@@ -121,7 +121,6 @@ public class AiCowController : AbstractCowController
 
     void ChangeState(AiState state)
     {
-        Debug.Log("CHANGE STATE TO " + state);
         State = state;
         timeInCurrentState = 0;
         switch(State)

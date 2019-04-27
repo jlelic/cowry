@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerController : AbstractCowController
 {
     private bool pressedEat = false;
+    private bool pressedCharge = false;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    override protected void FixedUpdate()
     {
         base.FixedUpdate();
 
@@ -21,7 +20,7 @@ public class PlayerController : AbstractCowController
         var axisY = Input.GetAxis("Vertical");
         TargetVelocity = new Vector2(axisX, axisY);
 
-        if(Input.GetAxisRaw("Eat") > 0)
+        if (Input.GetAxisRaw("Eat") > 0)
         {
             Eat = !pressedEat;
             pressedEat = true;
@@ -30,6 +29,17 @@ public class PlayerController : AbstractCowController
         {
             Eat = false;
             pressedEat = false;
+        }
+
+        if (Input.GetAxisRaw("Charge") > 0)
+        {
+            Charge = !pressedCharge;
+            pressedCharge = true;
+        }
+        else
+        {
+            Charge = false;
+            pressedCharge = false;
         }
     }
 }
