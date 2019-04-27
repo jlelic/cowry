@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     private AbstractController controller;
-    public float Speed = 6f;
+    public float Speed = 2f;
     private Rigidbody2D rigidBody;
 
     void Awake()
@@ -24,6 +24,6 @@ public class MovementManager : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        rigidBody.velocity = Vector2.Lerp(controller.TargetVelocity, rigidBody.velocity, 0.5f);
+        rigidBody.velocity = Vector2.Lerp(controller.TargetVelocity.normalized*Speed, rigidBody.velocity, 0.5f);
     }
 }

@@ -19,7 +19,7 @@ public class PlayerController : AbstractCowController
 
         var axisX = Input.GetAxis("Horizontal");
         var axisY = Input.GetAxis("Vertical");
-        TargetVelocity = new Vector2(axisX * Speed, axisY * Speed);
+        TargetVelocity = new Vector2(axisX, axisY);
 
         if(Input.GetAxisRaw("Eat") > 0)
         {
