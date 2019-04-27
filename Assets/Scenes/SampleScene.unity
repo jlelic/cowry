@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grassPrefab: {fileID: 7660282899144273491, guid: e63e6210030168144a495a7c30502e6b,
     type: 3}
-  suitorPrefab: {fileID: 4895883147859601195, guid: 6ee1420b48707c1458b5cd3f8e4898f8,
+  suitorPrefab: {fileID: 4895883147859601195, guid: fce7ecca70008734894d8cf5c0ded919,
     type: 3}
   grassSpawnInterval: 10
   suitorsSpawnInterval: 10
@@ -6708,8 +6708,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 44d6ca27b25e7104798006249ced21ad,
+      objectReference: {fileID: 21300000, guid: 0e1dad05496fa724eb391c3953def64b,
         type: 3}
+    - target: {fileID: 4895883147859601188, guid: 6ee1420b48707c1458b5cd3f8e4898f8,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895883147859601188, guid: 6ee1420b48707c1458b5cd3f8e4898f8,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ee1420b48707c1458b5cd3f8e4898f8, type: 3}
 --- !u!1 &1815798602
