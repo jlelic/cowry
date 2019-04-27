@@ -5,7 +5,7 @@ using UnityEngine;
 public class CowManager : MonoBehaviour
 {
     public float Fatness { get; private set; } = 1;
-    public bool CanEat { get; private set; } = false;
+    public List<GameObject> CanEat { get; private set; } = new List<GameObject>();
     public bool IsEating { get; private set; } = false;
 
     [SerializeField] private GameObject cowBody;
@@ -14,7 +14,6 @@ public class CowManager : MonoBehaviour
     private AbstractCowController cowController;
     private Animator animator;
     private bool isPlayer = false;
-    private GameObject targetGrass;
 
     void Awake()
     {
@@ -30,8 +29,7 @@ public class CowManager : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<GrassBehavior>() != null)
         {
-            CanEat = true;
-            targetGrass = collision.gameObject;
+            CanEat.Add(collision.gameObject);
         }
     }
 
@@ -39,8 +37,7 @@ public class CowManager : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<GrassBehavior>() != null)
         {
-            CanEat = false;
-            targetGrass = null;
+            CanEat.Remove(collision.gameObject);
         }
     }
 
@@ -49,7 +46,7 @@ public class CowManager : MonoBehaviour
         cowBody.transform.localScale = new Vector2(Mathf.Sign(transform.localScale.x) * Fatness, Fatness);
 
 
-        if (CanEat && cowController.Eat)
+        if (CanEat.Count > 0 && cowController.Eat)
         {
             IsEating = true;
         }
@@ -58,7 +55,9 @@ public class CowManager : MonoBehaviour
 
     void OnEatFinish()
     {
-        Destroy(targetGrass);
+        var eatenGrass = CanEat[0];
+        CanEat.RemoveAt(0);
+        Destroy(eatenGrass);
         IsEating = false;
         Fatness += 0.2f;
     }

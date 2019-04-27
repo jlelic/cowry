@@ -17,6 +17,7 @@ public class GrassBehavior : MonoBehaviour
         iTween.ScaleTo(gameObject, new Vector3(1, 1, 1), 3f);
 
         renderer = GetComponent<SpriteRenderer>();
+        GameManager.Instance.GrassList.Add(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,5 +43,10 @@ public class GrassBehavior : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GrassList.Remove(gameObject);
     }
 }

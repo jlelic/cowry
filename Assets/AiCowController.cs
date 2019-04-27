@@ -8,8 +8,9 @@ public class AiCowController : AbstractCowController
     {
         Initial = 0,
         Idle = 1,
-        LookForSpot = 2,
-        MovingToSpot = 3
+        LookForGrass = 2,
+        LookForSpot = 3,
+        MovingToSpot = 4,
     }
 
     [SerializeField] private float minIdleTime = 1;
@@ -28,6 +29,12 @@ public class AiCowController : AbstractCowController
 
         TargetVelocity = Vector2.zero;
 
+        if(timeInCurrentState > 10)
+        {
+            ChangeState(AiState.Idle);
+            return;
+        }
+
         var position2d = new Vector2(transform.position.x, transform.position.y);
         switch (State)
         {
@@ -37,6 +44,32 @@ public class AiCowController : AbstractCowController
             case AiState.Idle:
                 if(timeInCurrentState > timeForIdling)
                 {
+                    ChangeState(AiState.LookForGrass);
+                }
+                break;
+            case AiState.LookForGrass:
+                var foundGrass = false;
+                foreach (var grass in GameManager.Instance.GrassList)
+                {
+                    var grassPosition2d = new Vector2(grass.transform.position.x, grass.transform.position.y);
+                    var grassDirection = grassPosition2d - position2d;
+                    var grassDistance = Vector2.Distance(grassPosition2d, position2d);
+                    var grassHit = Physics2D.Raycast(position2d, grassDirection, grassDistance);
+                    Debug.DrawRay(position2d, grassDirection * grassDistance, Color.green, 1, false);
+                    if (grassHit.collider==null)
+                    {
+                        targetSpot = grassPosition2d;
+                        ChangeState(AiState.MovingToSpot);
+                        foundGrass = true;
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log(grassHit.collider);
+                    }
+                }
+                if(!foundGrass)
+                {
                     ChangeState(AiState.LookForSpot);
                 }
                 break;
@@ -44,13 +77,12 @@ public class AiCowController : AbstractCowController
                 var direction = (Vector2)(Quaternion.Euler(0, 0, Random.value * 360) * Vector2.right);
                 var distance = Random.Range(minWanderDistance, maxWanderDistance);
                 var hit = Physics2D.Raycast(position2d, direction, distance);
-                Debug.DrawRay(position2d, direction*distance, Color.red, 3, false);
+                Debug.DrawRay(position2d, direction*distance, Color.red, 1, false);
                 if (hit.collider == null)
                 {
                     targetSpot = position2d + direction * distance;
                     ChangeState(AiState.MovingToSpot);
                 }
-                Debug.Log(hit.collider);
                 break;
             case AiState.MovingToSpot:
                 distance = Vector2.Distance(targetSpot, position2d);
