@@ -12,12 +12,14 @@ public class CowManager : MonoBehaviour
 
 
     private AbstractCowController cowController;
+    private MovementManager movement;
     private Animator animator;
     private bool isPlayer = false;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        movement = GetComponent<MovementManager>();
         cowController = GetComponent<AbstractCowController>();
         if (cowController is PlayerController)
         {
@@ -46,9 +48,10 @@ public class CowManager : MonoBehaviour
         //cowBody.transform.localScale = new Vector2(Mathf.Sign(transform.localScale.x) * Fatness, Fatness);
 
 
-        if (CanEat.Count > 0 && cowController.Eat)
+        if (CanEat.Count > 0 && cowController.Eat && !movement.IsCharging)
         {
             IsEating = true;
+            movement.CanMove = false;
         }
         animator.SetBool("isEating", IsEating);
     }
@@ -56,6 +59,7 @@ public class CowManager : MonoBehaviour
     void OnEatFinish()
     {
         IsEating = false;
+        movement.CanMove = true;
         if (CanEat.Count == 0)
         {
             return;

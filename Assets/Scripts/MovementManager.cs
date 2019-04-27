@@ -4,6 +4,7 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     public bool IsCharging { get; private set; }
+    public bool CanMove = true;
     private AbstractController controller;
     public float Speed = 90f;
     private Animator animator;
@@ -30,13 +31,18 @@ public class MovementManager : MonoBehaviour
         {
             StartCoroutine(Charging());
         }
-        if(IsCharging)
+        var targetVelocity = controller.TargetVelocity.normalized;
+        if(!CanMove)
+        {
+            targetVelocity = Vector2.zero;
+        }
+        if (IsCharging)
         {
             rigidBody.velocity = rigidBody.velocity.normalized * 13;
         }
         else
         {
-            rigidBody.velocity = Vector2.Lerp(controller.TargetVelocity.normalized * Speed * Time.deltaTime, rigidBody.velocity, 0.5f);
+            rigidBody.velocity = Vector2.Lerp(targetVelocity * Speed * Time.deltaTime, rigidBody.velocity, 0.5f);
         }
         animator.SetFloat("velocity", rigidBody.velocity.magnitude);
     }
