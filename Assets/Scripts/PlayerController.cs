@@ -13,9 +13,9 @@ public class PlayerController : AbstractCowController
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         var axisX = Input.GetAxis("Horizontal");
         var axisY = Input.GetAxis("Vertical");

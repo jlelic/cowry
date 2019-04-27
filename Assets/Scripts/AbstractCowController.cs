@@ -6,7 +6,7 @@ public abstract class AbstractCowController : AbstractController
 {
     public bool Eat { get; protected set; } = false;
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         Eat = false;
     }

@@ -23,14 +23,35 @@ public class AiCowController : AbstractCowController
     [SerializeField] private float timeForIdling = 0;
     [SerializeField] private Vector2 targetSpot;
 
+    private CowManager manager;
+
+    private void Awake()
+    {
+        manager = GetComponent<CowManager>();
+    }
+
     void FixedUpdate()
     {
         timeInCurrentState += Time.deltaTime;
 
         TargetVelocity = Vector2.zero;
 
+        if(manager.IsEating)
+        {
+            return;
+        }
         if(timeInCurrentState > 10)
         {
+            ChangeState(AiState.Idle);
+            return;
+        }
+        if(manager.CanEat.Count == 0)
+        {
+            Eat = false;    
+        }
+        else 
+        {
+            Eat = true;
             ChangeState(AiState.Idle);
             return;
         }
@@ -100,6 +121,7 @@ public class AiCowController : AbstractCowController
 
     void ChangeState(AiState state)
     {
+        Debug.Log("CHANGE STATE TO " + state);
         State = state;
         timeInCurrentState = 0;
         switch(State)

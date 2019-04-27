@@ -58,10 +58,14 @@ public class CowManager : MonoBehaviour
 
     void OnEatFinish()
     {
+        IsEating = false;
+        if (CanEat.Count == 0)
+        {
+            return;
+        }
         var eatenGrass = CanEat[0];
         CanEat.RemoveAt(0);
         Destroy(eatenGrass);
-        IsEating = false;
         Fatness += 0.2f;
     }
 }
