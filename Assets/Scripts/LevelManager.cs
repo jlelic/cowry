@@ -6,6 +6,17 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float grassSpawnInterval = 10;
     [SerializeField] private float suitorsSpawnInterval = 1;
 
+    private GameManager gameManager;
+
+    void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        if (!gameManager)
+        {
+            throw new System.Exception("GAME MANAGER NOT FOUND!");
+        }
+    }
+
     public float GrassSpawnInterval
     {
         get { return grassSpawnInterval; }
@@ -35,7 +46,7 @@ public class LevelManager : MonoBehaviour
 
     virtual public void OnRichSuitorKilled()
     {
-        Debug.Log("GAME OVER");
+        gameManager.GameOver("YOU DESTROYED YOUR ONLY WAY OUT");
     }
 
     virtual public void OnGrassEaten()
@@ -50,11 +61,11 @@ public class LevelManager : MonoBehaviour
 
     virtual public void OnPoorSuitorEntered()
     {
-        Debug.Log("GAME OVER");
+        gameManager.GameOver("YOU GOT SOLD TO A POOR PERSON, GOOD LUCK");
     }
 
     virtual public void OnRichSuitorEntered()
     {
-        Debug.Log("LEVEL COMPLETED");
+        gameManager.LevelCompleted();
     }
 }
