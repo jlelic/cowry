@@ -82,4 +82,8 @@ public class LevelManager : MonoBehaviour
     {
         gameManager.LevelCompleted();
     }
+
+    virtual public void OnMessageCompleted(string messageId) {
+
+    }
 }

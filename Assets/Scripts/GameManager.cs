@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public bool CanEndGame = false;
+    public bool CanEndGame = true;
 
     const float GAME_HALF_WIDTH = 7;
     const float GAME_HALF_HEIGHT = 4;
@@ -107,7 +107,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetObjective(string objective)
+    {
+        UiManager.ShowObjective(objective);
+    }
 
+    public void ClearObjective()
+    {
+        UiManager.ClearObjective();
+    }
 
     IEnumerator StartSpawnSuitors()
     {

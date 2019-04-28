@@ -124,7 +124,7 @@ public class CowManager : MonoBehaviour
             GameManager.Instance.LevelManager.OnGrassEaten();
         }
         Debug.Log(Fatness);
-        Fatness = Fatness + 15;
+        Fatness = Fatness + 7;
         Debug.Log(Fatness);
     }
 
@@ -135,6 +135,10 @@ public class CowManager : MonoBehaviour
             StopCoroutine(stunnedCoroutine);
         }
         stunnedCoroutine = StartCoroutine(Stunned());
+        if(!isPlayer)
+        {
+            GameManager.Instance.LevelManager.OnCowStunned();
+        }
     }
 
     IEnumerator Stunned()

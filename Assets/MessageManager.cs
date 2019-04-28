@@ -6,11 +6,22 @@ using UnityEngine.UI;
 
 public class MessageManager : MonoBehaviour
 {
+    class GameMessage
+    {
+        public readonly string message;
+        public readonly string id;
+        public GameMessage(string message, string id = null)
+        {
+            this.message = message;
+            this.id = id;
+        }
+    }
+
     [SerializeField] GameObject messagePanel;
     [SerializeField] Text messageText;
 
-    Queue<string> messageQueue = new Queue<string>();
-    private string currentMessage;
+    Queue<GameMessage> messageQueue = new Queue<GameMessage>();
+    private GameMessage currentMessage;
     private PlayerController playerController;
 
     void Awake()
@@ -32,16 +43,20 @@ public class MessageManager : MonoBehaviour
         {
             return;
         }
-        messageText.text = currentMessage;
+        messageText.text = currentMessage.message;
 
         if (Input.anyKeyDown)
         {
+            if(currentMessage.id != null)
+            {
+                GameManager.Instance.LevelManager.OnMessageCompleted(currentMessage.id);
+            }
             currentMessage = null;
         }
     }
 
-    public void AddMessage(string message)
+    public void AddMessage(string message, string messageId = null)
     {
-        messageQueue.Enqueue(message);
+        messageQueue.Enqueue(new GameMessage(message, messageId));
     }
 }
