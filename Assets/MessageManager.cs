@@ -30,7 +30,7 @@ public class MessageManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (currentMessage == null && messageQueue.Count > 0)
         {
@@ -43,6 +43,7 @@ public class MessageManager : MonoBehaviour
         {
             return;
         }
+        Time.timeScale = 0;
         messageText.text = currentMessage.message;
 
         if (Input.anyKeyDown)
@@ -52,6 +53,7 @@ public class MessageManager : MonoBehaviour
                 GameManager.Instance.LevelManager.OnMessageCompleted(currentMessage.id);
             }
             currentMessage = null;
+            Time.timeScale = 1;
         }
     }
 

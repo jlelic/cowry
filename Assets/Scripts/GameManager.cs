@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour
 
     public bool CanEndGame = true;
 
-    const float GAME_HALF_WIDTH = 7;
-    const float GAME_HALF_HEIGHT = 4;
-
     public static GameManager Instance { get; private set; }
 
     public bool IsPlaying { get; private set; } = true;
@@ -147,8 +144,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             var possiblePosition = new Vector3(
-                Random.Range(-GAME_HALF_WIDTH, +GAME_HALF_WIDTH),
-                Random.Range(-GAME_HALF_HEIGHT, +GAME_HALF_HEIGHT),
+                Random.Range(-LevelManager.LevelHalfWidth, +LevelManager.LevelHalfWidth),
+                Random.Range(-LevelManager.LevelHalfHeight, +LevelManager.LevelHalfHeight),
                 grassPrefab.transform.position.z
             );
             if(Physics2D.OverlapCircle(possiblePosition, collider.radius) == null)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level1 : LevelManager
 {
     int patchesEaten = 0;
+    float timeWithoutAction = 0;
     [SerializeField] private GameObject aiCow;
 
     void Start()
@@ -13,10 +14,10 @@ public class Level1 : LevelManager
         messageManager.AddMessage("After all the years you have lived here you know there's no way you can escape out of here to get to your baby.");
         messageManager.AddMessage("However maybe if you got sold somewhere else...");
         messageManager.AddMessage("Look at you! Who would buy such skinny sickly cow as you are? You need to eat something!");
-        messageManager.AddMessage("There a patch of grass in front of you. Move closer using W, A, S, D and then pres E to eat it.", "initial");
+        messageManager.AddMessage("There a patch of grass right next to you. Move closer using W, A, S, D and then pres E to eat it.", "initial");
     }
 
-    public override void OnGrassEaten()
+    public override void OnGrassEaten(bool isPlayer)
     {
         patchesEaten++;
         if (patchesEaten == 1)
@@ -54,6 +55,20 @@ public class Level1 : LevelManager
                 aiCow.SetActive(true);
                 gameManager.SetObjective("Show the other cow who's the boss");
                 break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(patchesEaten > 0)
+        {
+            return;
+        }
+        timeWithoutAction += Time.deltaTime;
+        if(timeWithoutAction > 20)
+        {
+            messageManager.AddMessage("Move close to a patch of grass using W, A, S, D and then pres E to eat it.");
+            timeWithoutAction = 0;
         }
     }
 }

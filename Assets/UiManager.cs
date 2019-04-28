@@ -27,6 +27,7 @@ public class UiManager : MonoBehaviour
 
     public void ShowGameOverScreen(string reason = "")
     {
+        overlayPanel.gameObject.SetActive(true);
         overlayPanel.enabled = true;
         Utils.tweenColor(overlayPanel, Color.black, 4);
 
@@ -48,6 +49,7 @@ public class UiManager : MonoBehaviour
 
     public void ShowLevelCompletedScreen()
     {
+        overlayPanel.gameObject.SetActive(true);
         overlayPanel.enabled = true;
         Utils.tweenColor(overlayPanel, Color.black, 2, 0, EaseType.easeInBounce);
 

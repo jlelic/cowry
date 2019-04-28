@@ -2,17 +2,20 @@
 
 public class LevelManager : MonoBehaviour
 {
-
+    public int LevelHalfWidth = 7;
+    public int LevelHalfHeight = 4;
     [SerializeField] private float grassSpawnInterval = 10;
     [SerializeField] private float suitorsSpawnInterval = 1;
     [SerializeField] private float initialFatness = 1;
 
     protected GameManager gameManager;
     protected MessageManager messageManager;
+    protected CameraManager cameraManager;
 
     void Awake()
     {
         messageManager = FindObjectOfType<MessageManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
         gameManager = FindObjectOfType<GameManager>();
         if (!gameManager)
         {
@@ -63,7 +66,7 @@ public class LevelManager : MonoBehaviour
         gameManager.GameOver("YOU DESTROYED YOUR ONLY WAY OUT");
     }
 
-    virtual public void OnGrassEaten()
+    virtual public void OnGrassEaten(bool isPlayer)
     {
 
     }
