@@ -42,7 +42,7 @@ public class Level2 : LevelManager
 
     public override void OnPoorSuitorKilled()
     {
-        gameManager.LevelCompleted();
+        gameManager.LevelCompleted(2);
     }
 
     public override void OnMessageCompleted(string messageId)

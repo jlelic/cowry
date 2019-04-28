@@ -22,8 +22,11 @@ public class CowManager : MonoBehaviour
 
     [SerializeField] private SpriteRenderer cowBody;
     [SerializeField] private Sprite[] cowBodySprites;
+    [SerializeField] private AudioClip playerStunClip;
+    [SerializeField] private AudioClip impactClip;
 
     private AbstractCowController cowController;
+    private AudioSource audioSource;
     private Coroutine stunnedCoroutine;
     private MovementManager movement;
     private Animator animator;
@@ -34,6 +37,7 @@ public class CowManager : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         movement = GetComponent<MovementManager>();
         fatnessBar = FindObjectOfType<FatnessBar>();
         cowController = GetComponent<AbstractCowController>();
@@ -69,6 +73,11 @@ public class CowManager : MonoBehaviour
     {
         if(movement.IsCharging && collision.collider.GetComponent<Rock>() != null)
         {
+            if (isPlayer)
+            {
+                audioSource.clip = playerStunClip;
+                audioSource.Play();
+            }
             StartCoroutine(Stunned());
         }
     }
@@ -127,6 +136,8 @@ public class CowManager : MonoBehaviour
         {
             GameManager.Instance.LevelManager.OnCowStunned();
         }
+        audioSource.clip = impactClip;
+        audioSource.Play();
     }
 
     IEnumerator Stunned()

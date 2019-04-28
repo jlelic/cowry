@@ -23,6 +23,7 @@ public class MessageManager : MonoBehaviour
     Queue<GameMessage> messageQueue = new Queue<GameMessage>();
     private GameMessage currentMessage;
     private PlayerController playerController;
+    private bool holdingConfirmButton = false;
 
     void Awake()
     {
@@ -46,14 +47,23 @@ public class MessageManager : MonoBehaviour
         Time.timeScale = 0;
         messageText.text = currentMessage.message;
 
-        if (Input.anyKeyDown)
+        if (Input.GetAxisRaw("Confirm")>=1)
         {
-            if(currentMessage.id != null)
+            if(holdingConfirmButton)
+            {
+                return;
+            }
+            holdingConfirmButton = true;
+            if (currentMessage.id != null)
             {
                 GameManager.Instance.LevelManager.OnMessageCompleted(currentMessage.id);
             }
             currentMessage = null;
             Time.timeScale = 1;
+        }
+        else
+        {
+            holdingConfirmButton = false;
         }
     }
 
