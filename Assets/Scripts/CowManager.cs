@@ -7,6 +7,7 @@ public class CowManager : MonoBehaviour
     public float Fatness {
         get{ return fatness; }
         set {
+            Debug.Log("setting fatness");
             fatness = value;
             if (fatnessBar != null && isPlayer)
             {
@@ -36,11 +37,11 @@ public class CowManager : MonoBehaviour
         fatnessBar = FindObjectOfType<FatnessBar>();
         cowController = GetComponent<AbstractCowController>();
         GetComponent<DamageTakenHandler>().RegisterListener(OnHit);
-        Fatness = 70;
         if (cowController is PlayerController)
         {
             isPlayer = true;
         }
+        Fatness = 70;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
