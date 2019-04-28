@@ -16,11 +16,13 @@ public class CowManager : MonoBehaviour
     }
     public List<GameObject> CanEat { get; private set; } = new List<GameObject>();
     public bool IsEating { get; private set; } = false;
+    public bool IsStunned { get; private set; } = false;
 
     [SerializeField] private GameObject cowBody;
 
 
     private AbstractCowController cowController;
+    private Coroutine stunnedCoroutine;
     private MovementManager movement;
     private Animator animator;
     private bool isPlayer = false;
@@ -33,6 +35,7 @@ public class CowManager : MonoBehaviour
         movement = GetComponent<MovementManager>();
         fatnessBar = FindObjectOfType<FatnessBar>();
         cowController = GetComponent<AbstractCowController>();
+        GetComponent<DamageTakenHandler>().RegisterListener(OnHit);
         Fatness = 70;
         if (cowController is PlayerController)
         {
@@ -71,12 +74,19 @@ public class CowManager : MonoBehaviour
 
     void OnEatFinish()
     {
-        IsEating = false;
-        movement.CanMove = true;
+        if(IsStunned)
+        {
+            movement.CanMove = true;
+        }
+        if(!IsEating)
+        {
+            return;
+        }
         if (CanEat.Count == 0)
         {
             return;
         }
+        IsEating = false;
         var eatenGrass = CanEat[0];
         CanEat.RemoveAt(0);
         Destroy(eatenGrass);
@@ -85,5 +95,24 @@ public class CowManager : MonoBehaviour
             GameManager.Instance.LevelManager.OnGrassEaten();
         }
         Fatness = Fatness + 15;
+    }
+
+    public void OnHit()
+    {
+        if(stunnedCoroutine!=null)
+        {
+            StopCoroutine(stunnedCoroutine);
+        }
+        stunnedCoroutine = StartCoroutine(Stunned());
+    }
+
+    IEnumerator Stunned()
+    {
+        IsStunned = true;
+        movement.CanMove = false;
+        yield return new WaitForSeconds(2f);
+        movement.CanMove = true;
+        IsStunned = false;
+        stunnedCoroutine = null;
     }
 }

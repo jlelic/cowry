@@ -85,7 +85,7 @@ public class UiManager : MonoBehaviour
             "PENTA KILL",
             "HOLY SHIT!!!",
         };
-        var textIndex = bodyCount -2 > texts.Length ? texts.Length-1 : bodyCount - 2;
+        var textIndex = bodyCount -2 > texts.Length - 1 ? texts.Length-1 : bodyCount - 2;
         var color = multiKillText.color;
         var solidColor = new Color(color.r, color.g, color.b);
         multiKillText.color = solidColor;
