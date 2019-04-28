@@ -4593,7 +4593,7 @@ MonoBehaviour:
   grassSpawnInterval: 4
   suitorsSpawnInterval: 0
   initialFatness: 25
-  grassFatIncrease: 7
+  grassFatIncrease: 1
   son: {fileID: 818221171}
 --- !u!1001 &957627141381996628
 PrefabInstance:

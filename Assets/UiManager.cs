@@ -20,10 +20,13 @@ public class UiManager : MonoBehaviour
         multiKillText.enabled = false;
         endLevelReasonText.enabled = false;
         endLevelTitleText.enabled = false;
-        overlayPanel.color = Transparent;
-        overlayPanel.enabled = false;
         objectiveText.text = "";
+        overlayPanel.gameObject.SetActive(true);
+        overlayPanel.color = Color.black;
+        overlayPanel.enabled = true;
+        Utils.tweenColor(overlayPanel, Transparent, 2, 0, EaseType.easeInCirc, true);
     }
+
 
     public void ShowGameOverScreen(string reason = "")
     {

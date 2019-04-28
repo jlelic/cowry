@@ -11,7 +11,7 @@ public class Utils
         return new Vector2(vector.x, vector.y);
     }
 
-    public static void tweenColor(Graphic graphic, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear)
+    public static void tweenColor(Graphic graphic, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear, bool ignoreTimeScale= false)
     {
         ValueTo(graphic.gameObject, Hash(
          "from", graphic.color,
@@ -19,6 +19,7 @@ public class Utils
          "delay", delay,
          "time", time,
          "easetype", easeType,
+         "ignoretimescale", ignoreTimeScale,
          "onupdate", (Action<Color>)(newColor =>
          {
              graphic.color = newColor;

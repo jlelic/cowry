@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,13 +78,15 @@ public class GameManager : MonoBehaviour
         }
         IsPlaying = false;
         playerController.enabled = false;
-        StartCoroutine(ShowLevelCompletedScreen(delay));
+        StartCoroutine(LevelCompletedCleanup(delay));
     }
 
-    IEnumerator ShowLevelCompletedScreen(float delay)
+    IEnumerator LevelCompletedCleanup(float delay)
     {
         yield return new WaitForSeconds(delay);
         UiManager.ShowLevelCompletedScreen();
+        yield return new WaitForSeconds(6);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     public void GameOver(string reason = "", float delay = 0f)
@@ -94,13 +97,15 @@ public class GameManager : MonoBehaviour
         }
         IsPlaying = false;
         playerController.enabled = false;
-        StartCoroutine(ShowGameOverScreen(reason, delay));
+        StartCoroutine(GameOverCleanup(reason, delay));
     }
 
-    IEnumerator ShowGameOverScreen(string reason, float delay)
+    IEnumerator GameOverCleanup(string reason, float delay)
     {
         yield return new WaitForSeconds(delay);
         UiManager.ShowGameOverScreen(reason);
+        yield return new WaitForSeconds(5 + reason.Length/15f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnSuitorKilled(bool isRich)
