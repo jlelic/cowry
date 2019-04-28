@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    public bool CanEndGame = false;
+
     const float GAME_HALF_WIDTH = 7;
     const float GAME_HALF_HEIGHT = 4;
 
@@ -21,11 +23,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject grassPrefab;
     [SerializeField] private GameObject suitorPrefab;
 
-
     private PlayerController playerController;
+    private MovementManager playerMovement;
     private Coroutine spawnGrassCoroutine;
     private Coroutine spawnSuitorsCoroutine;
-    
+    private int killStreakCount = 0;
 
     private void Awake()
     {
@@ -55,11 +57,24 @@ public class GameManager : MonoBehaviour
         {
             throw new System.Exception("PLAYER CONTROLLER NOT FOUND!");
         }
+        playerMovement = playerController.GetComponent<MovementManager>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(!playerMovement.IsCharging)
+        {
+            if(killStreakCount > 1)
+            {
+                UiManager.ShowMultiKillMessage(killStreakCount);
+            }
+            killStreakCount = 0;
+        }
     }
 
     public void LevelCompleted()
     {
-        if (!IsPlaying)
+        if (!IsPlaying || !CanEndGame)
         {
             return;
         }
@@ -70,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(string reason = "")
     {
-        if(!IsPlaying)
+        if(!IsPlaying || !CanEndGame)
         {
             return;
         }
@@ -78,6 +93,21 @@ public class GameManager : MonoBehaviour
         playerController.enabled = false;
         UiManager.ShowGameOverScreen(reason);
     }
+
+    public void OnSuitorKilled(bool isRich)
+    {
+        killStreakCount++;
+        if (isRich)
+        {
+            LevelManager.OnRichSuitorKilled();
+        }
+        else
+        {
+            LevelManager.OnPoorSuitorKilled();
+        }
+    }
+
+
 
     IEnumerator StartSpawnSuitors()
     {

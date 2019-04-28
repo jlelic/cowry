@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class CowManager : MonoBehaviour
 {
-    public float Fatness { get; private set; } = 1;
+    public float Fatness {
+        get{ return fatness; }
+        set {
+            fatness = value;
+            if (fatnessBar != null && isPlayer)
+            {
+                fatnessBar.SetFatness(value);
+            }
+        }
+    }
     public List<GameObject> CanEat { get; private set; } = new List<GameObject>();
     public bool IsEating { get; private set; } = false;
 
@@ -15,12 +24,16 @@ public class CowManager : MonoBehaviour
     private MovementManager movement;
     private Animator animator;
     private bool isPlayer = false;
+    private FatnessBar fatnessBar;
+    private float fatness;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<MovementManager>();
+        fatnessBar = FindObjectOfType<FatnessBar>();
         cowController = GetComponent<AbstractCowController>();
+        Fatness = 70;
         if (cowController is PlayerController)
         {
             isPlayer = true;
@@ -71,6 +84,6 @@ public class CowManager : MonoBehaviour
         {
             GameManager.Instance.LevelManager.OnGrassEaten();
         }
-        Fatness += 0.2f;
+        Fatness = Fatness + 15;
     }
 }

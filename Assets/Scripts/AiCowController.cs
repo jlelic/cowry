@@ -86,7 +86,6 @@ public class AiCowController : AbstractCowController
                     }
                     else
                     {
-                        Debug.Log(grassHit.collider);
                     }
                 }
                 if(!foundGrass)

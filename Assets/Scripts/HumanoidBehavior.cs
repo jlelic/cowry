@@ -28,14 +28,7 @@ public class HumanoidBehavior : MonoBehaviour
         GetComponent<MovementManager>().enabled = false;
         transform.position = new Vector3(transform.position.x, transform.position.y, -5);
         iTween.ScaleTo(gameObject, Vector3.one * 2, delay);
-        if(isRich)
-        {
-            GameManager.Instance.LevelManager.OnRichSuitorKilled();
-        }
-        else
-        {
-            GameManager.Instance.LevelManager.OnPoorSuitorKilled();
-        }
+        GameManager.Instance.OnSuitorKilled(isRich);
         StartCoroutine(DestroyAfterDelay(delay));
     }
 

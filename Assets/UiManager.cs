@@ -12,9 +12,11 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Image overlayPanel;
     [SerializeField] private Text endLevelTitleText;
     [SerializeField] private Text endLevelReasonText;
+    [SerializeField] private Text multiKillText;
 
     void Start()
     {
+        multiKillText.enabled = false;
         endLevelReasonText.enabled = false;
         endLevelTitleText.enabled = false;
         overlayPanel.color = Transparent;
@@ -24,12 +26,12 @@ public class UiManager : MonoBehaviour
     public void ShowGameOverScreen(string reason = "")
     {
         overlayPanel.enabled = true;
-        tweenColor(overlayPanel, Color.black, 4);
+        Utils.tweenColor(overlayPanel, Color.black, 4);
 
         endLevelReasonText.enabled = true;
         endLevelReasonText.color = Transparent;
         endLevelReasonText.text = reason;
-        tweenColor(endLevelReasonText, Color.white, 2, 2);
+        Utils.tweenColor(endLevelReasonText, Color.white, 2, 2);
 
         endLevelTitleText.enabled = true;
         endLevelTitleText.color = Transparent;
@@ -45,7 +47,7 @@ public class UiManager : MonoBehaviour
     public void ShowLevelCompletedScreen()
     {
         overlayPanel.enabled = true;
-        tweenColor(overlayPanel, Color.black, 2, 0, EaseType.easeInBounce);
+        Utils.tweenColor(overlayPanel, Color.black, 2, 0, EaseType.easeInBounce);
 
         endLevelReasonText.enabled = false;
 
@@ -74,18 +76,24 @@ public class UiManager : MonoBehaviour
         ));
     }
 
-    void tweenColor(Graphic graphic, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear)
+    public void ShowMultiKillMessage(int bodyCount)
     {
-        ValueTo(graphic.gameObject, Hash(
-         "from", graphic.color,
-         "to", color,
-         "delay", delay,
-         "time", time,
-         "easetype", easeType,
-         "onupdate", (Action<Color>)(newColor =>
-         {
-             graphic.color = newColor;
-         })
-        ));
+        var texts = new [] {
+            "DOUBLE KILL",
+            "TRIPLE KILL",
+            "QUADRUPLE KILL",
+            "PENTA KILL",
+            "HOLY SHIT!!!",
+        };
+        var textIndex = bodyCount -2 > texts.Length ? texts.Length-1 : bodyCount - 2;
+        var color = multiKillText.color;
+        var solidColor = new Color(color.r, color.g, color.b);
+        multiKillText.color = solidColor;
+        multiKillText.enabled = true;
+        multiKillText.text = texts[textIndex];
+        ShakePosition(multiKillText.gameObject, new Vector3(bodyCount, bodyCount), 3);
+        var transparentColor = new Color(color.r, color.g, color.b, 0);
+        Utils.tweenColor(multiKillText, transparentColor, 1, 2);
     }
+
 }

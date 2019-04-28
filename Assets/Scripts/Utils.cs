@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using static iTween;
+using System;
 
 public class Utils
 {
@@ -7,4 +10,20 @@ public class Utils
     {
         return new Vector2(vector.x, vector.y);
     }
+
+    public static void tweenColor(Graphic graphic, Color color, float time, float delay = 0, EaseType easeType = EaseType.linear)
+    {
+        ValueTo(graphic.gameObject, Hash(
+         "from", graphic.color,
+         "to", color,
+         "delay", delay,
+         "time", time,
+         "easetype", easeType,
+         "onupdate", (Action<Color>)(newColor =>
+         {
+             graphic.color = newColor;
+         })
+        ));
+    }
+
 }
