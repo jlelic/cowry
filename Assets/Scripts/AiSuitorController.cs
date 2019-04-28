@@ -86,7 +86,7 @@ public class AiSuitorController : AbstractCowController
         var targetPosition2d = new Vector2(target.position.x, target.position.y);
         var direction = targetPosition2d - position2d;
         var distance = Vector2.Distance(targetPosition2d, position2d);
-        var hit = Physics2D.Raycast(position2d, direction, distance, (1 << 9)-1);
+        var hit = Physics2D.Raycast(position2d, direction, distance, 127);
         Debug.DrawRay(position2d, direction * distance, Color.blue, 1, false);
         return hit.collider == null;
     }
@@ -96,7 +96,7 @@ public class AiSuitorController : AbstractCowController
         var doorEntrance = targetPoint.GetComponent<DoorEntrance>();
         doorEntrance.Knock();
         knocked = true;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         doorEntrance.Open();
         if (GetComponent<HumanoidBehavior>().IsRich)
         {
