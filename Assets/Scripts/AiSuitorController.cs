@@ -93,7 +93,8 @@ public class AiSuitorController : AbstractCowController
 
     IEnumerator KnockOnTheDoor()
     {
-        Debug.Log("KNOCK KNOCK");
+        var doorEntrance = targetPoint.GetComponent<DoorEntrance>();
+        doorEntrance.Knock();
         knocked = true;
         yield return new WaitForSeconds(3);
         if (GetComponent<HumanoidBehavior>().IsRich)

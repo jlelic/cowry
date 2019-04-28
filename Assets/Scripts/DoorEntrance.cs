@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DoorEntrance : MonoBehaviour
 {
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         GameManager.Instance.DoorEntranceList.Add(gameObject);
@@ -12,5 +19,10 @@ public class DoorEntrance : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.DoorEntranceList.Remove(gameObject);
+    }
+
+    public void Knock()
+    {
+        audioSource.Play();
     }
 }
