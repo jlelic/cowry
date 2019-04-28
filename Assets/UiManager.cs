@@ -78,6 +78,7 @@ public class UiManager : MonoBehaviour
 
     public void ShowMultiKillMessage(int bodyCount)
     {
+        iTween.Stop(multiKillText.gameObject);
         var texts = new [] {
             "DOUBLE KILL",
             "TRIPLE KILL",

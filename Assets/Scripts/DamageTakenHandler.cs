@@ -23,21 +23,9 @@ public class DamageTakenHandler : MonoBehaviour
 
     private void OnDamageTaken()
     {
-        StartCoroutine(DamageTakenSlowMo());
         foreach(var action in listeners)
         {
             action();
         }
-    }
-
-    IEnumerator DamageTakenSlowMo()
-    {
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(0.03f);
-        Time.timeScale = 1f;
-        yield return new WaitForSecondsRealtime(0.45f);
-        Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(0.5f);
-        Time.timeScale = 1f;
     }
 }
