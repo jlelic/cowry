@@ -98,6 +98,7 @@ public class CowManager : MonoBehaviour
             movement.CanMove = false;
         }
         animator.SetBool("isEating", IsEating);
+        animator.SetBool("isStunned", IsStunned);
     }
 
     void OnEatFinish()
