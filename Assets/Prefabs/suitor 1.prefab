@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77bd325ab80b7149948459155a464cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reachedNavPoint: 0
   navigatingToDoor: 0
   targetPoint: {fileID: 0}
 --- !u!70 &4895883147859601185
@@ -198,3 +197,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13dc96c95ae2ec46b43ff9e2832a926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRich: 1

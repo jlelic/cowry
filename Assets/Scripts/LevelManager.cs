@@ -28,9 +28,14 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    virtual public void OnSuitorKilled()
+    virtual public void OnPoorSuitorKilled()
     {
 
+    }
+
+    virtual public void OnRichSuitorKilled()
+    {
+        Debug.Log("GAME OVER");
     }
 
     virtual public void OnGrassEaten()

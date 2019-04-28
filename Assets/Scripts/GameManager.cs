@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    public LevelManager LevelManager { get; private set; }
     public HashSet<GameObject> GrassList { get; private set; } = new HashSet<GameObject>();
     public HashSet<GameObject> NavPointList { get; private set; } = new HashSet<GameObject>();
     public HashSet<GameObject> DoorEntranceList { get; private set; } = new HashSet<GameObject>();
@@ -21,13 +22,10 @@ public class GameManager : MonoBehaviour
 
     private Coroutine spawnGrassCoroutine;
     private Coroutine spawnSuitorsCoroutine;
-    private LevelManager levelManager;
 
     private void Awake()
     {
         GameManager.Instance = this;
-        spawnGrassCoroutine = StartCoroutine(StartSpawnGrass());
-        spawnSuitorsCoroutine = StartCoroutine(StartSpawnSuitors());
         var levelManagers = FindObjectsOfType<LevelManager>();
         if(levelManagers.Length == 0)
         {
@@ -41,7 +39,10 @@ public class GameManager : MonoBehaviour
             }
             throw new System.Exception("FOUND MULTIPLE LEVEL MANAGERS");
         }
-        levelManager = levelManagers[0];
+        LevelManager = levelManagers[0];
+
+        spawnGrassCoroutine = StartCoroutine(StartSpawnGrass());
+        spawnSuitorsCoroutine = StartCoroutine(StartSpawnSuitors());
     }
 
     IEnumerator StartSpawnSuitors()
@@ -49,11 +50,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         while (true)
         {
-            Debug.Log(SpawnPointList.Count); ;
+            yield return new WaitWhile(() => LevelManager.SuitorSpawnInterval <= 0);
             var spawnPoint = SpawnPointList[(int)(Random.value * SpawnPointList.Count)];
             Instantiate(suitorPrefab);
             suitorPrefab.transform.position = spawnPoint.transform.position;
-            yield return new WaitForSeconds(levelManager.SuitorSpawnInterval);
+            LevelManager.OnSuitorSpawned();
+            yield return new WaitForSeconds(LevelManager.SuitorSpawnInterval);
         }
     }
 
@@ -61,8 +63,9 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitWhile(() => LevelManager.GrassSpawnInterval <= 0);
             SpawnGrass();
-            yield return new WaitForSeconds(levelManager.GrassSpawnInterval);
+            yield return new WaitForSeconds(LevelManager.GrassSpawnInterval);
         }
     }
 
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
             );
             if(Physics2D.OverlapCircle(possiblePosition, collider.radius) == null)
             {
+                LevelManager.OnGrassSpawned();
                 grassObject.transform.position = possiblePosition;
                 return;
             }

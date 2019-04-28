@@ -67,6 +67,10 @@ public class CowManager : MonoBehaviour
         var eatenGrass = CanEat[0];
         CanEat.RemoveAt(0);
         Destroy(eatenGrass);
+        if(isPlayer)
+        {
+            GameManager.Instance.LevelManager.OnGrassEaten();
+        }
         Fatness += 0.2f;
     }
 }
