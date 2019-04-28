@@ -66,7 +66,7 @@ public class Level2 : LevelManager
     public void FixedUpdate()
     {
         timeElapsed += Time.deltaTime;
-        if(!stage1Completed && timeElapsed > 1)
+        if(!stage1Completed && timeElapsed > 60)
         {
             gameManager.ClearObjective();
             stage1Completed = true;

@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c55811d6b9a6e4c9d0f2e77adc0380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanEndGame: 0
+  CanEndGame: 1
   grassPrefab: {fileID: 7660282899144273491, guid: e63e6210030168144a495a7c30502e6b,
     type: 3}
-  suitorPrefab: {fileID: 4895883147859601195, guid: fce7ecca70008734894d8cf5c0ded919,
+  suitorPrefab: {fileID: 4895883147859601195, guid: 6ee1420b48707c1458b5cd3f8e4898f8,
     type: 3}
 --- !u!114 &957627140496761984
 MonoBehaviour:

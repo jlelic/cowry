@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float grassSpawnInterval = 10;
     [SerializeField] private float suitorsSpawnInterval = 1;
     [SerializeField] private float initialFatness = 1;
+    [SerializeField] private float grassFatIncrease = 7;
 
     protected GameManager gameManager;
     protected MessageManager messageManager;
@@ -43,7 +44,12 @@ public class LevelManager : MonoBehaviour
     public float InitialFatness
     {
         get { return initialFatness; }
-        private set { initialFatness = value; }
+    }
+
+    public float GrassFatIncrease
+    {
+        get { return grassFatIncrease; }
+        private set { grassFatIncrease = value; }
     }
 
     virtual public void OnSuitorSpawned()
@@ -78,12 +84,12 @@ public class LevelManager : MonoBehaviour
 
     virtual public void OnPoorSuitorEntered()
     {
-        gameManager.GameOver("YOU GOT SOLD TO A POOR PERSON, GOOD LUCK");
+        gameManager.GameOver("You got gifted as a dowry to a poor person. Now you will never see your baby again.", 3);
     }
 
     virtual public void OnRichSuitorEntered()
     {
-        gameManager.LevelCompleted();
+        gameManager.LevelCompleted(3);
     }
 
     virtual public void OnMessageCompleted(string messageId) {

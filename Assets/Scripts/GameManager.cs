@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LevelCompleted()
+    public void LevelCompleted(float delay = 0)
     {
         if (!IsPlaying || !CanEndGame)
         {
@@ -77,10 +77,16 @@ public class GameManager : MonoBehaviour
         }
         IsPlaying = false;
         playerController.enabled = false;
+        StartCoroutine(ShowLevelCompletedScreen(delay));
+    }
+
+    IEnumerator ShowLevelCompletedScreen(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         UiManager.ShowLevelCompletedScreen();
     }
 
-    public void GameOver(string reason = "")
+    public void GameOver(string reason = "", float delay = 0f)
     {
         if(!IsPlaying || !CanEndGame)
         {
@@ -88,6 +94,12 @@ public class GameManager : MonoBehaviour
         }
         IsPlaying = false;
         playerController.enabled = false;
+        StartCoroutine(ShowGameOverScreen(reason, delay));
+    }
+
+    IEnumerator ShowGameOverScreen(string reason, float delay)
+    {
+        yield return new WaitForSeconds(delay);
         UiManager.ShowGameOverScreen(reason);
     }
 

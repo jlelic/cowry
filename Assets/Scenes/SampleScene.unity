@@ -4348,6 +4348,7 @@ MonoBehaviour:
   grassSpawnInterval: 1
   suitorsSpawnInterval: 10
   initialFatness: 10
+  grassFatIncrease: 7
 --- !u!1001 &957627141381996628
 PrefabInstance:
   m_ObjectHideFlags: 0

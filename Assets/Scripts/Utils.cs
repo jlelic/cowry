@@ -26,4 +26,11 @@ public class Utils
         ));
     }
 
+    public static string ToTimeString(float seconds)
+    {
+        int m = Mathf.FloorToInt(seconds / 60F);
+        int s = Mathf.FloorToInt(seconds - m * 60);
+        return string.Format("{0:0}:{1:00}", m, s);
+    }
+
 }

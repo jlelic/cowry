@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HumanoidBehavior : MonoBehaviour
 {
-    [SerializeField] private bool isRich = false;    
+    [SerializeField] private bool isRich = false;
     DamageTakenHandler damageTakenHandler;
 
     public bool IsRich { get { return isRich; } }
@@ -18,6 +18,7 @@ public class HumanoidBehavior : MonoBehaviour
     void OnDamageTaken()
     {
         StartCoroutine(DamageTakenSlowMo());
+        GetComponent<AudioSource>().Play();
         Die();
     }
 

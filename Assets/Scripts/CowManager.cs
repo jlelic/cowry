@@ -75,20 +75,11 @@ public class CowManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        //cowBody.transform.localScale = new Vector2(Mathf.Sign(transform.localScale.x) * Fatness, Fatness);
-
         var currentFatnessLevel = (int)Mathf.Clamp(fatness / 25, 0, cowBodySprites.Length - 0.1f);
-        if (isPlayer)
-        {
-//            Debug.Log("IS " + currentFatnessLevel);
-//            Debug.Log("WAS " + FatnessLevel);
-        }
         if (currentFatnessLevel != FatnessLevel)
         {
-            Debug.Log("CHANGE");
             FatnessLevel = currentFatnessLevel;
-            Debug.Log(currentFatnessLevel);
-            Debug.Log(cowBodySprites[currentFatnessLevel]);
+            movement.Speed = 150 - currentFatnessLevel * 30;
             cowBody.sprite = cowBodySprites[currentFatnessLevel];
         }
 
@@ -103,8 +94,9 @@ public class CowManager : MonoBehaviour
 
     void OnEatFinish()
     {
-        if(IsStunned)
+        if (IsStunned)
         {
+            IsEating = false;
             return;
         }
         movement.CanMove = true;
@@ -112,16 +104,16 @@ public class CowManager : MonoBehaviour
         {
             return;
         }
+        IsEating = false;
         if (CanEat.Count == 0)
         {
             return;
         }
-        IsEating = false;
         var eatenGrass = CanEat[0];
         CanEat.RemoveAt(0);
         Destroy(eatenGrass);
         GameManager.Instance.LevelManager.OnGrassEaten(isPlayer);
-        Fatness = Fatness + 7;
+        Fatness = Fatness + GameManager.Instance.LevelManager.GrassFatIncrease;
     }
 
     public void OnHit()
@@ -140,6 +132,7 @@ public class CowManager : MonoBehaviour
     IEnumerator Stunned()
     {
         IsStunned = true;
+        IsEating = false;
         movement.CanMove = false;
         yield return new WaitForSeconds(2f);
         movement.CanMove = true;
