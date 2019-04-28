@@ -59,6 +59,14 @@ public class CowManager : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(movement.IsCharging && collision.collider.GetComponent<Rock>() != null)
+        {
+            StartCoroutine(Stunned());
+        }
+    }
+
     void Update()
     {
         //cowBody.transform.localScale = new Vector2(Mathf.Sign(transform.localScale.x) * Fatness, Fatness);
@@ -76,9 +84,10 @@ public class CowManager : MonoBehaviour
     {
         if(IsStunned)
         {
-            movement.CanMove = true;
+            return;
         }
-        if(!IsEating)
+        movement.CanMove = true;
+        if (!IsEating)
         {
             return;
         }
