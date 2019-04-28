@@ -32,10 +32,12 @@ public class DamageTakenHandler : MonoBehaviour
 
     IEnumerator DamageTakenSlowMo()
     {
-        Time.timeScale = 0.05f;
-        //yield return new WaitForSecondsRealtime(0.08f);
-        //Time.timeScale = 0.2f;
-        yield return new WaitForSecondsRealtime(0.08f);
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(0.03f);
+        Time.timeScale = 1f;
+        yield return new WaitForSecondsRealtime(0.45f);
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(0.5f);
         Time.timeScale = 1f;
     }
 }

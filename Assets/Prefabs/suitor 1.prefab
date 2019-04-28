@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4895883147859601195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.86, y: 8.1, z: 0}
+  m_LocalPosition: {x: -0.48, y: -7.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMove: 1
   Speed: 90
+  chargeDuration: 0.45
+  chargeCooldown: 0.2
   chargeParticles: []
 --- !u!114 &4895883147859601190
 MonoBehaviour:

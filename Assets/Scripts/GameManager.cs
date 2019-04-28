@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject grassPrefab;
     [SerializeField] private GameObject suitorPrefab;
     [SerializeField] private float grassSpawnInterval = 10;
-    [SerializeField] private float suitorsSpawnInterval = 3;
+    [SerializeField] private float suitorsSpawnInterval = 1;
 
 
     Coroutine spawnGrassCoroutine;
