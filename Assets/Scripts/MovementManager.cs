@@ -11,6 +11,7 @@ public class MovementManager : MonoBehaviour
     public float Speed = 90f;
     private Animator animator;
     private Rigidbody2D rigidBody;
+    private Vector2 chargingDirection;
     [SerializeField] private float chargeDuration = 0.45f;
     [SerializeField] private float chargeCooldown = 0.2f;
     [SerializeField] private ParticleSystem[] chargeParticles;
@@ -25,11 +26,11 @@ public class MovementManager : MonoBehaviour
     void FixedUpdate()
     {
         var scale = transform.localScale;
-        if (controller.TargetVelocity.x > 0)
+        if (rigidBody.velocity.x > 0)
         {
             transform.localScale = new Vector3(-Mathf.Abs(scale.x), scale.y, scale.z);
         }
-        if (controller.TargetVelocity.x < 0)
+        if (rigidBody.velocity.x < 0)
         {
             transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }
@@ -44,7 +45,7 @@ public class MovementManager : MonoBehaviour
         }
         if (IsCharging)
         {
-            rigidBody.velocity = rigidBody.velocity.normalized * 13;
+            rigidBody.velocity = chargingDirection.normalized * 13;
         }
         else
         {
@@ -55,6 +56,7 @@ public class MovementManager : MonoBehaviour
 
     IEnumerator Charging()
     {
+        chargingDirection = controller.TargetDirection;
         var strechBase = 7/8f;
         var strechScale = 15/56f;
         var velocityNorm = rigidBody.velocity.normalized;

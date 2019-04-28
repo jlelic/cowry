@@ -6,7 +6,6 @@ using UnityEngine;
 public class AiSuitorController : AbstractCowController
 {
     private Vector2 position2d;
-    [SerializeField] private bool reachedNavPoint = false;
     [SerializeField] private bool navigatingToDoor = false;
     [SerializeField] private GameObject targetPoint;
 
@@ -69,7 +68,6 @@ public class AiSuitorController : AbstractCowController
         var targetPosition2d = new Vector2(target.position.x, target.position.y);
         var direction = targetPosition2d - position2d;
         var distance = Vector2.Distance(targetPosition2d, position2d);
-        var mask = new LayerMask();
         var hit = Physics2D.Raycast(position2d, direction, distance, (1 << 9)-1);
         Debug.DrawRay(position2d, direction * distance, Color.blue, 1, false);
         return hit.collider == null;

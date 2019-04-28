@@ -17,18 +17,31 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject grassPrefab;
     [SerializeField] private GameObject suitorPrefab;
-    [SerializeField] private float grassSpawnInterval = 10;
-    [SerializeField] private float suitorsSpawnInterval = 1;
 
 
-    Coroutine spawnGrassCoroutine;
-    Coroutine spawnSuitorsCoroutine;
+    private Coroutine spawnGrassCoroutine;
+    private Coroutine spawnSuitorsCoroutine;
+    private LevelManager levelManager;
 
     private void Awake()
     {
         GameManager.Instance = this;
         spawnGrassCoroutine = StartCoroutine(StartSpawnGrass());
         spawnSuitorsCoroutine = StartCoroutine(StartSpawnSuitors());
+        var levelManagers = FindObjectsOfType<LevelManager>();
+        if(levelManagers.Length == 0)
+        {
+            throw new System.Exception("LEVEL MANAGER NOT FOUND IN THE LEVEL!");
+        }
+        else if(levelManagers.Length > 1)
+        {
+            foreach(var manager in levelManagers)
+            {
+                Debug.LogWarning(manager);
+            }
+            throw new System.Exception("FOUND MULTIPLE LEVEL MANAGERS");
+        }
+        levelManager = levelManagers[0];
     }
 
     IEnumerator StartSpawnSuitors()
@@ -40,7 +53,7 @@ public class GameManager : MonoBehaviour
             var spawnPoint = SpawnPointList[(int)(Random.value * SpawnPointList.Count)];
             Instantiate(suitorPrefab);
             suitorPrefab.transform.position = spawnPoint.transform.position;
-            yield return new WaitForSeconds(suitorsSpawnInterval);
+            yield return new WaitForSeconds(levelManager.SuitorSpawnInterval);
         }
     }
 
@@ -49,7 +62,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             SpawnGrass();
-            yield return new WaitForSeconds(grassSpawnInterval);
+            yield return new WaitForSeconds(levelManager.GrassSpawnInterval);
         }
     }
 

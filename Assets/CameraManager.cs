@@ -11,17 +11,14 @@ public class CameraManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>().gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var playerPosition = player.transform.position;
-        var targetViewPosition = playerPosition + (mousePosition - playerPosition).normalized * 5f;
+        var targetViewPosition = playerPosition + (mousePosition - playerPosition).normalized * 2f;
         transform.position = Vector3.Lerp(
             transform.position,
             new Vector3(
-                //player.transform.position.x,
-                //player.transform.position.y,
                 targetViewPosition.x,
                 targetViewPosition.y,
                 transform.position.z

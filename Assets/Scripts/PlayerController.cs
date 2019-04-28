@@ -16,6 +16,9 @@ public class PlayerController : AbstractCowController
     {
         base.FixedUpdate();
 
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        TargetDirection = Utils.V3toV2(mousePosition - transform.position);
+
         var axisX = Input.GetAxis("Horizontal");
         var axisY = Input.GetAxis("Vertical");
         TargetVelocity = new Vector2(axisX, axisY);
