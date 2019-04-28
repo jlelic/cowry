@@ -7,14 +7,21 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float suitorsSpawnInterval = 1;
 
     private GameManager gameManager;
+    private MessageManager messageManager;
 
     void Awake()
     {
+        messageManager = FindObjectOfType<MessageManager>();
         gameManager = FindObjectOfType<GameManager>();
         if (!gameManager)
         {
             throw new System.Exception("GAME MANAGER NOT FOUND!");
         }
+    }
+
+    void Start()
+    {
+        messageManager.AddMessage("Hello world!");
     }
 
     public float GrassSpawnInterval

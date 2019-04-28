@@ -13,14 +13,16 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Text endLevelTitleText;
     [SerializeField] private Text endLevelReasonText;
     [SerializeField] private Text multiKillText;
+    [SerializeField] private Text objectiveText;
 
-    void Start()
+    void Awake()
     {
         multiKillText.enabled = false;
         endLevelReasonText.enabled = false;
         endLevelTitleText.enabled = false;
         overlayPanel.color = Transparent;
         overlayPanel.enabled = false;
+        objectiveText.text = "";
     }
 
     public void ShowGameOverScreen(string reason = "")
@@ -97,4 +99,13 @@ public class UiManager : MonoBehaviour
         Utils.tweenColor(multiKillText, transparentColor, 1, 2);
     }
 
+    public void ShowObjective(string objective)
+    {
+        objectiveText.text = objective;
+    }
+
+    public void ClearObjective()
+    {
+        objectiveText.text = "";
+    }
 }

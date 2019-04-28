@@ -7,7 +7,6 @@ public class CowManager : MonoBehaviour
     public float Fatness {
         get{ return fatness; }
         set {
-            Debug.Log("setting fatness");
             fatness = value;
             if (fatnessBar != null && isPlayer)
             {
