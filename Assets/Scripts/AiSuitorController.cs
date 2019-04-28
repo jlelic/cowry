@@ -96,7 +96,7 @@ public class AiSuitorController : AbstractCowController
         var doorEntrance = targetPoint.GetComponent<DoorEntrance>();
         doorEntrance.Knock();
         knocked = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         doorEntrance.Open();
         if (GetComponent<HumanoidBehavior>().IsRich)
         {
