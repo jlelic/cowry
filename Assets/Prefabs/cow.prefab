@@ -4881,7 +4881,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889957902229862021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0.3, z: -1}
+  m_LocalPosition: {x: -0.3, y: 0.3, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1889957902264422904}
@@ -5086,7 +5086,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4452842aa312dd8469cc97a2a03c3189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cowBody: {fileID: 1889957900920767024}
+  cowBody: {fileID: 1889957900920767026}
+  cowBodySprites:
+  - {fileID: 21300000, guid: 78524a1d6c40ee640804357f97e754b9, type: 3}
+  - {fileID: 21300002, guid: 78524a1d6c40ee640804357f97e754b9, type: 3}
+  - {fileID: 21300004, guid: 78524a1d6c40ee640804357f97e754b9, type: 3}
+  - {fileID: 21300006, guid: 78524a1d6c40ee640804357f97e754b9, type: 3}
 --- !u!95 &1889957902264422909
 Animator:
   serializedVersion: 3

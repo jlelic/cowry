@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CowManager : MonoBehaviour
 {
@@ -17,9 +18,10 @@ public class CowManager : MonoBehaviour
     public List<GameObject> CanEat { get; private set; } = new List<GameObject>();
     public bool IsEating { get; private set; } = false;
     public bool IsStunned { get; private set; } = false;
+    public int FatnessLevel { get; private set; } = 0;
 
-    [SerializeField] private GameObject cowBody;
-
+    [SerializeField] private SpriteRenderer cowBody;
+    [SerializeField] private Sprite[] cowBodySprites;
 
     private AbstractCowController cowController;
     private Coroutine stunnedCoroutine;
@@ -36,11 +38,15 @@ public class CowManager : MonoBehaviour
         fatnessBar = FindObjectOfType<FatnessBar>();
         cowController = GetComponent<AbstractCowController>();
         GetComponent<DamageTakenHandler>().RegisterListener(OnHit);
+    }
+
+    private void Start()
+    {
         if (cowController is PlayerController)
         {
             isPlayer = true;
+            Fatness = FindObjectOfType<LevelManager>().InitialFatness;
         }
-        Fatness = 70;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,10 +73,24 @@ public class CowManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //cowBody.transform.localScale = new Vector2(Mathf.Sign(transform.localScale.x) * Fatness, Fatness);
 
+        var currentFatnessLevel = (int)Mathf.Clamp(fatness / 25, 0, cowBodySprites.Length - 0.1f);
+        if (isPlayer)
+        {
+//            Debug.Log("IS " + currentFatnessLevel);
+//            Debug.Log("WAS " + FatnessLevel);
+        }
+        if (currentFatnessLevel != FatnessLevel)
+        {
+            Debug.Log("CHANGE");
+            FatnessLevel = currentFatnessLevel;
+            Debug.Log(currentFatnessLevel);
+            Debug.Log(cowBodySprites[currentFatnessLevel]);
+            cowBody.sprite = cowBodySprites[currentFatnessLevel];
+        }
 
         if (CanEat.Count > 0 && cowController.Eat && !movement.IsCharging)
         {
@@ -103,7 +123,9 @@ public class CowManager : MonoBehaviour
         {
             GameManager.Instance.LevelManager.OnGrassEaten();
         }
+        Debug.Log(Fatness);
         Fatness = Fatness + 15;
+        Debug.Log(Fatness);
     }
 
     public void OnHit()

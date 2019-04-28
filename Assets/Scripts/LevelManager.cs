@@ -5,9 +5,10 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private float grassSpawnInterval = 10;
     [SerializeField] private float suitorsSpawnInterval = 1;
+    [SerializeField] private float initialFatness = 1;
 
-    private GameManager gameManager;
-    private MessageManager messageManager;
+    protected GameManager gameManager;
+    protected MessageManager messageManager;
 
     void Awake()
     {
@@ -34,6 +35,12 @@ public class LevelManager : MonoBehaviour
     {
         get { return suitorsSpawnInterval; }
         private set { suitorsSpawnInterval = value; }
+    }
+
+    public float InitialFatness
+    {
+        get { return initialFatness; }
+        private set { initialFatness = value; }
     }
 
     virtual public void OnSuitorSpawned()

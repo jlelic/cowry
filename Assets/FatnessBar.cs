@@ -25,7 +25,7 @@ public class FatnessBar : MonoBehaviour
 
     public void SetFatness(float value)
     {
-        value = Mathf.Clamp(value, 0, 100);
+        value = Mathf.Clamp(value, 0, 99.9f);
         rectTransform.sizeDelta = new Vector2(value/100*fullLength, rectTransform.sizeDelta.y);
         barFill.color = GetColorForValue(value);
         fatness = value;

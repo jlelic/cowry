@@ -1157,6 +1157,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &929673959 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1889957900920767026, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+    type: 3}
+  m_PrefabInstance: {fileID: 1889957902195459320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980641763
 GameObject:
   m_ObjectHideFlags: 0
@@ -4325,6 +4331,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c10936726ed8734ab55719f1fdc8e94, type: 3}
+--- !u!1 &957627140496761988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 957627140496761988, guid: 098b325a2e50a7e4796e16884fabf2b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 957627141381996628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &957627140496761989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957627140496761988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778399fa062ef914f8b459a16d00f16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassSpawnInterval: 1
+  suitorsSpawnInterval: 10
+  initialFatness: 10
 --- !u!1001 &957627141381996628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4397,6 +4424,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 957627141750832016, guid: 098b325a2e50a7e4796e16884fabf2b5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 957627141669553435, guid: 098b325a2e50a7e4796e16884fabf2b5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 957627141195264226, guid: 098b325a2e50a7e4796e16884fabf2b5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 957627141838740731, guid: 098b325a2e50a7e4796e16884fabf2b5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 957627141480298673, guid: 098b325a2e50a7e4796e16884fabf2b5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 098b325a2e50a7e4796e16884fabf2b5, type: 3}
 --- !u!1001 &1889957902195459320
@@ -4465,6 +4517,45 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBodySprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBody
+      value: 
+      objectReference: {fileID: 929673959}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBodySprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 78524a1d6c40ee640804357f97e754b9,
+        type: 3}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBodySprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: 78524a1d6c40ee640804357f97e754b9,
+        type: 3}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBodySprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300004, guid: 78524a1d6c40ee640804357f97e754b9,
+        type: 3}
+    - target: {fileID: 1889957902264422908, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: cowBodySprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300006, guid: 78524a1d6c40ee640804357f97e754b9,
+        type: 3}
+    - target: {fileID: 1889957902229862022, guid: 3b460a4b51114c74fbcc4cb67bbc3663,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b460a4b51114c74fbcc4cb67bbc3663, type: 3}
