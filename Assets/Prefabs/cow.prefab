@@ -5165,6 +5165,8 @@ MonoBehaviour:
   impactWoodClip: {fileID: 8300000, guid: cb4fde2b1da57c64c9e55ed022d66c9e, type: 3}
   impactParticleEffect: {fileID: 7467415455415176854, guid: 26aaf116cce95494d9c1a048bb1f5566,
     type: 3}
+  starParticleEffect: {fileID: 8517591176517133559, guid: 9cf1fc286000e2049b3387b5eee1f279,
+    type: 3}
 --- !u!95 &1889957902264422909
 Animator:
   serializedVersion: 3

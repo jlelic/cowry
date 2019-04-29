@@ -5,6 +5,7 @@ using UnityEngine;
 public class HumanoidBehavior : MonoBehaviour
 {
     [SerializeField] private bool isRich = false;
+    [SerializeField] AudioClip hitClip;
     DamageTakenHandler damageTakenHandler;
 
     public bool IsRich { get { return isRich; } }
@@ -19,7 +20,7 @@ public class HumanoidBehavior : MonoBehaviour
     {
         StartCoroutine(DamageTakenSlowMo());
         GameManager.Instance.CameraEffect(Color.white);
-        GetComponent<AudioSource>().Play();
+        Utils.PlayAudio(GetComponent<AudioSource>(), hitClip);
         Die();
     }
 

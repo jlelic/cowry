@@ -6,14 +6,17 @@ using UnityEngine;
 public class AiSuitorController : AbstractCowController
 {
     private Coroutine knockingCoroutine;
+    private AudioSource audioSource;
     private Vector2 position2d;
     [SerializeField] private bool navigatingToDoor = false;
     [SerializeField] private bool knocked = false;
     [SerializeField] private GameObject targetPoint;
+    [SerializeField] private AudioClip doorKnockClip;
 
     private void Awake()
     {
-        GetComponent<DamageTakenHandler>().RegisterListener(OnDamageTaken);    
+        GetComponent<DamageTakenHandler>().RegisterListener(OnDamageTaken);
+        audioSource = GetComponent<AudioSource>();
     }
 
     override protected void FixedUpdate()
@@ -94,7 +97,7 @@ public class AiSuitorController : AbstractCowController
     IEnumerator KnockOnTheDoor()
     {
         var doorEntrance = targetPoint.GetComponent<DoorEntrance>();
-        doorEntrance.Knock();
+        Utils.PlayAudio(audioSource, doorKnockClip);
         knocked = true;
         yield return new WaitForSeconds(6);
         doorEntrance.Open();

@@ -34,6 +34,13 @@ public class Utils
         return string.Format("{0:0}:{1:00}", m, s);
     }
 
+    public static void PlayAudio(AudioSource source, bool randomPitch = false)
+    {
+        Debug.Log("PLAY");
+        source.pitch = randomPitch ? UnityEngine.Random.Range(0.75f, 1.5f) : 1;
+        source.Play();
+    }
+
     public static void PlayAudio(AudioSource source, AudioClip clip, bool randomPitch = false)
     {
         source.pitch = randomPitch ? UnityEngine.Random.Range(0.75f, 1.5f) : 1;

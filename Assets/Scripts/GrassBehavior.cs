@@ -40,13 +40,24 @@ public class GrassBehavior : MonoBehaviour
         }
     }
 
-    void Update()
+    public void OnEaten()
     {
+        GetComponent<SpriteRenderer>().enabled = false;
+        Utils.PlayAudio(GetComponent<AudioSource>(), true);
+        GameManager.Instance.GrassList.Remove(gameObject);
+        StartCoroutine(DestroyAfterDelay());
+    }
 
+    IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(this);
     }
 
     void OnDestroy()
     {
-        GameManager.Instance.GrassList.Remove(gameObject);
+        if(GameManager.Instance.GrassList.Contains(gameObject)) {
+            GameManager.Instance.GrassList.Remove(gameObject);
+        }
     }
 }

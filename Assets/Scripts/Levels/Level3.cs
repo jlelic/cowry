@@ -21,7 +21,7 @@ public class Level3 : LevelManager
 
     public override void OnGrassEaten(bool isPlayer)
     {
-        if(isPlayer)
+        if(isPlayer || stage1Completed)
         {
             return;
         }

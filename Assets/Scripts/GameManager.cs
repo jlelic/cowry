@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        playerMovement.CanMove = false;
         IsPlaying = false;
         playerController.enabled = false;
         StartCoroutine(LevelCompletedCleanup(delay));
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         IsPlaying = false;
+        playerMovement.CanMove = false;
         playerController.enabled = false;
         StartCoroutine(GameOverCleanup(reason, delay));
     }

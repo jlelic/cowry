@@ -27,6 +27,7 @@ public class CowManager : MonoBehaviour
     [SerializeField] private AudioClip impactClip;
     [SerializeField] private AudioClip impactWoodClip;
     [SerializeField] private GameObject impactParticleEffect;
+    [SerializeField] private GameObject starParticleEffect;
 
     private AbstractCowController cowController;
     private AudioSource audioSource;
@@ -138,10 +139,14 @@ public class CowManager : MonoBehaviour
         {
             return;
         }
-        var eatenGrass = CanEat[0];
+        var eatenGrass = CanEat[0].GetComponent<GrassBehavior>();
         CanEat.RemoveAt(0);
-        Destroy(eatenGrass);
+        eatenGrass.OnEaten();
         GameManager.Instance.LevelManager.OnGrassEaten(isPlayer);
+        if (isPlayer)
+        {
+            Instantiate(starParticleEffect, transform.position, Quaternion.identity);
+        }
         Fatness = Fatness + GameManager.Instance.LevelManager.GrassFatIncrease;
     }
 

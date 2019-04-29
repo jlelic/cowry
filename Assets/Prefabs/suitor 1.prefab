@@ -120,6 +120,7 @@ MonoBehaviour:
   navigatingToDoor: 0
   knocked: 0
   targetPoint: {fileID: 0}
+  doorKnockClip: {fileID: 8300000, guid: ed82ceeef94994e42a0a2d5e64f207f1, type: 3}
 --- !u!70 &4895883147859601185
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -203,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRich: 1
+  hitClip: {fileID: 8300000, guid: fca9027f8a1a4c8469287fa706a38aa1, type: 3}
 --- !u!82 &68099618634654653
 AudioSource:
   m_ObjectHideFlags: 0
