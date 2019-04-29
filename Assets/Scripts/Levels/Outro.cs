@@ -12,7 +12,7 @@ public class Outro : LevelManager
         messageManager.AddMessage(@"
         Credits:
 
-    Jozef Lelic - development
+    Jozef Lelic - developer
     joseph.lelic@gmail.com
 
     michal durovec - lead artist
@@ -21,7 +21,7 @@ public class Outro : LevelManager
     denis fedor - artist
     fedor.de@gmail.com
         ");
-        messageManager.AddMessage("", "initial");
+        messageManager.AddMessage("Thank you for playing", "initial");
     }
 
     public override void OnMessageCompleted(string messageId)

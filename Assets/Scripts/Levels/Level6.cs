@@ -8,18 +8,20 @@ public class Level6 : LevelManager
     float timeElapsed;
     bool introPlayed = false;
     bool stage1Completed = false;
+    bool chonkyShown = false;
 
     void Start()
     {
         merchant.SetActive(false);
         messageManager.AddMessage("Fill the fatness meter completely!");
-        messageManager.AddMessage("Oh and be careful, now there are two houses to keep an eye on!", "initial");
+        messageManager.AddMessage("Oh and be careful, now there are two houses to  keep an eye on!", "initial");
     }
 
     public override void OnFatnessChanged(float fatness)
     {
-        if(fatness >= 99)
+        if(fatness >= 99 && !chonkyShown)
         {
+            chonkyShown = true;
             stage1Completed = true;
             gameManager.ClearObjective();
             messageManager.AddMessage("Awesome! Now you don't even need to charge to attack. Your mere presence is enough to stun anybody who get too close", "protect");
