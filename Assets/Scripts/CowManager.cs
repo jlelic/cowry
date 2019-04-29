@@ -6,16 +6,7 @@ using UnityEngine.UI;
 
 public class CowManager : MonoBehaviour
 {
-    public float Fatness {
-        get{ return fatness; }
-        set {
-            fatness = value;
-            if (fatnessBar != null && isPlayer)
-            {
-                fatnessBar.SetFatness(value);
-            }
-        }
-    }
+
     public List<GameObject> CanEat { get; private set; } = new List<GameObject>();
     public bool IsEating { get; private set; } = false;
     public bool IsStunned { get; private set; } = false;
@@ -28,6 +19,7 @@ public class CowManager : MonoBehaviour
     [SerializeField] private AudioClip impactWoodClip;
     [SerializeField] private GameObject impactParticleEffect;
     [SerializeField] private GameObject starParticleEffect;
+    [SerializeField] private float fatness;
 
     private AbstractCowController cowController;
     private AudioSource audioSource;
@@ -36,7 +28,6 @@ public class CowManager : MonoBehaviour
     private Animator animator;
     private bool isPlayer = false;
     private FatnessBar fatnessBar;
-    private float fatness;
 
     void Awake()
     {
@@ -54,6 +45,46 @@ public class CowManager : MonoBehaviour
         {
             isPlayer = true;
             Fatness = FindObjectOfType<LevelManager>().InitialFatness;
+        } else
+        {
+            Fatness = fatness;
+        }
+    }
+
+    public float Fatness
+    {
+        get { return fatness; }
+        set
+        {
+            fatness = value;
+            var currentFatnessLevel = (int)Mathf.Clamp(fatness / 25, 0, cowBodySprites.Length - 0.1f);
+            if (currentFatnessLevel != FatnessLevel)
+            {
+                if (isPlayer)
+                {
+                    GameManager.Instance.LevelManager.OnFatnessLevelChanged(currentFatnessLevel);
+                }
+                switch(currentFatnessLevel)
+                {
+                    case 0:
+                    case 1:
+                        animator.speed = 1;
+                        break;
+                    case 2:
+                        animator.speed = 0.85f;
+                        break;
+                    case 3:
+                        animator.speed = 0.75f;
+                        break;
+                }
+                FatnessLevel = currentFatnessLevel;
+                movement.Speed = 150 - currentFatnessLevel * 30;
+                cowBody.sprite = cowBodySprites[currentFatnessLevel];
+            }
+            if (fatnessBar != null && isPlayer)
+            {
+                fatnessBar.SetFatness(value);
+            }
         }
     }
 
@@ -105,14 +136,6 @@ public class CowManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        var currentFatnessLevel = (int)Mathf.Clamp(fatness / 25, 0, cowBodySprites.Length - 0.1f);
-        if (currentFatnessLevel != FatnessLevel)
-        {
-            FatnessLevel = currentFatnessLevel;
-            movement.Speed = 150 - currentFatnessLevel * 30;
-            cowBody.sprite = cowBodySprites[currentFatnessLevel];
-        }
-
         if (CanEat.Count > 0 && cowController.Eat && !movement.IsCharging)
         {
             IsEating = true;

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4895883147859601187}
   - component: {fileID: 4895883147859601212}
   - component: {fileID: 68099618634654653}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: suitor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648190842006764623}
   - component: {fileID: 5924860703708657669}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: fanfare
   m_TagString: Untagged
   m_Icon: {fileID: 0}

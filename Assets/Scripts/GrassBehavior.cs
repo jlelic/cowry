@@ -51,7 +51,7 @@ public class GrassBehavior : MonoBehaviour
     IEnumerator DestroyAfterDelay()
     {
         yield return new WaitForSeconds(2);
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     void OnDestroy()

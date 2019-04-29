@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
@@ -90,6 +91,11 @@ public class LevelManager : MonoBehaviour
     virtual public void OnRichSuitorEntered()
     {
         gameManager.LevelCompleted(3);
+    }
+
+    virtual public void OnFatnessLevelChanged(int currentFatnessLevel)
+    {
+
     }
 
     virtual public void OnMessageCompleted(string messageId) {

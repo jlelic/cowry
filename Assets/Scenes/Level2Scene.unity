@@ -4616,7 +4616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelHalfWidth: 7
   LevelHalfHeight: 4
-  grassSpawnInterval: 4
+  grassSpawnInterval: 5
   suitorsSpawnInterval: 0
   initialFatness: 25
   grassFatIncrease: 1
