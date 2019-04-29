@@ -1480,6 +1480,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &817671782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4895883147859601195, guid: fce7ecca70008734894d8cf5c0ded919,
+    type: 3}
+  m_PrefabInstance: {fileID: 32631456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &819432022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6628,7 +6634,7 @@ MonoBehaviour:
   suitorsSpawnInterval: 8
   initialFatness: 36
   grassFatIncrease: 3
-  merchant: {fileID: 0}
+  merchant: {fileID: 817671782}
 --- !u!1001 &957627141381996628
 PrefabInstance:
   m_ObjectHideFlags: 0
