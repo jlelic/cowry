@@ -51,7 +51,7 @@ public class UiManager : MonoBehaviour
         ));
     }
 
-    public void ShowLevelCompletedScreen()
+    public void ShowLevelCompletedScreen(int lvlNum)
     {
         overlayPanel.gameObject.SetActive(true);
         overlayPanel.enabled = true;
@@ -61,7 +61,7 @@ public class UiManager : MonoBehaviour
 
         endLevelTitleText.enabled = true;
         endLevelTitleText.color = Transparent;
-        endLevelTitleText.text = "LEVEL COMPLETED";
+        endLevelTitleText.text = "LEVEL " + lvlNum + " COMPLETED";
         endLevelTitleText.color = new Color(150,255,150);
         MoveFrom(endLevelTitleText.gameObject, Hash(
              "y", -500,

@@ -18,6 +18,7 @@ public class CowManager : MonoBehaviour
     [SerializeField] private AudioClip impactClip;
     [SerializeField] private AudioClip impactWoodClip;
     [SerializeField] private AudioClip squeakClip;
+    [SerializeField] private AudioClip eatingClip;
     [SerializeField] private GameObject impactParticleEffect;
     [SerializeField] private GameObject starParticleEffect;
     [SerializeField] private float fatness;
@@ -59,6 +60,10 @@ public class CowManager : MonoBehaviour
         {
             fatness = value;
             var currentFatnessLevel = (int)Mathf.Clamp(fatness / 25, 0, cowBodySprites.Length - 0.1f);
+            if (isPlayer)
+            {
+                GameManager.Instance.LevelManager.OnFatnessChanged(value);
+            }
             if (currentFatnessLevel != FatnessLevel)
             {
                 if (isPlayer)
@@ -151,6 +156,10 @@ public class CowManager : MonoBehaviour
         {
             IsEating = true;
             movement.CanMove = false;
+            if (isPlayer)
+            {
+                Utils.PlayAudio(audioSource, eatingClip, false);
+            }
         }
         animator.SetBool("isEating", IsEating);
         animator.SetBool("isStunned", IsStunned);

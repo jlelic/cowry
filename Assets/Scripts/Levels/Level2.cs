@@ -37,7 +37,7 @@ public class Level2 : LevelManager
             gameManager.GameOver("Other cows ate too many of your grass patches, Loser!");
         }
 
-        gameManager.SetObjective(string.Format("Don't let other cows eat grass patches! {0} remaining", 5-patchesEaten));
+        gameManager.SetObjective(string.Format("Don't let other cows eat grass patches!\n{0} remaining", 5-patchesEaten));
     }
 
     public override void OnPoorSuitorKilled()
@@ -50,7 +50,7 @@ public class Level2 : LevelManager
         switch (messageId)
         {
             case "initial":
-                gameManager.SetObjective("Don't let other cows eat grass patches! 5 remaining");
+                gameManager.SetObjective("Don't let other cows eat grass patches!\n5 remaining");
                 break;
             case "sonComing":
                 son.SetActive(true);

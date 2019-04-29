@@ -8,6 +8,8 @@ public class MovementManager : MonoBehaviour
     public bool IsCharging { get; private set; } = false;
     public bool CanMove = true;
     private AbstractController controller;
+    private AudioSource audioSource;
+    private TrailRenderer trailRenderer;
     public float Speed = 90f;
     private Animator animator;
     private Rigidbody2D rigidBody;
@@ -15,12 +17,15 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private float chargeDuration = 0.45f;
     [SerializeField] private float chargeCooldown = 0.2f;
     [SerializeField] private ParticleSystem[] chargeParticles;
+    [SerializeField] private AudioClip chargeClip;
 
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         controller = GetComponent<AbstractController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     void FixedUpdate()
@@ -56,6 +61,8 @@ public class MovementManager : MonoBehaviour
 
     IEnumerator Charging()
     {
+        Utils.PlayAudio(audioSource, chargeClip, true);
+        trailRenderer.enabled = true;
         chargingDirection = controller.TargetDirection;
         var strechBase = 7/8f;
         var strechScale = 15/56f;
@@ -86,6 +93,7 @@ public class MovementManager : MonoBehaviour
             particleSystem.Stop();
         }
         IsCharging = false;
+        trailRenderer.enabled = false;
         yield return new WaitForSeconds(chargeCooldown);
         CanCharge = true;
     }

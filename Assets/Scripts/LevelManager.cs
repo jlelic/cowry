@@ -98,6 +98,11 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    virtual public void OnFatnessChanged(float fatness)
+    {
+
+    }
+
     virtual public void OnMessageCompleted(string messageId) {
 
     }

@@ -14,7 +14,7 @@ public class Level1 : LevelManager
         messageManager.AddMessage("After all the years you have lived here you know there's no way you can escape out of here to get to your baby.");
         messageManager.AddMessage("However maybe if you got sold somewhere else...");
         messageManager.AddMessage("Look at you! Who would buy such skinny sickly cow as you are? You need to eat something!");
-        messageManager.AddMessage("There a patch of grass right next to you. Move closer using W, A, S, D and then pres E to eat it.", "initial");
+        messageManager.AddMessage("There a patch of grass right next to you. Move closer using <color=yellow>W, A, S, D</color> and then pres <color=yellow>E</color> to eat it.", "initial");
     }
 
     public override void OnGrassEaten(bool isPlayer)
@@ -27,7 +27,7 @@ public class Level1 : LevelManager
         if (patchesEaten == 2)
         {
             gameManager.SetObjective("Eat 1 last patch of grass");
-            messageManager.AddMessage("You can use SPACE to charge towards mouse cursor");
+            messageManager.AddMessage("You can use <color=yellow>SPACE</color> to charge towards <color=yellow>mouse cursor</color>");
             messageManager.AddMessage("That way you can move faster or even deal damage to whatever you hit!");
         }
         if (patchesEaten == 3)
@@ -43,6 +43,7 @@ public class Level1 : LevelManager
 
     public override void OnCowStunned()
     {
+        timeWithoutAction = 0;
         gameManager.LevelCompleted(1);
     }
 
@@ -54,6 +55,7 @@ public class Level1 : LevelManager
                 gameManager.SetObjective("Eat 3 patches of grass");
                 break;
             case "chargeIntoCow":
+                timeWithoutAction = 0;
                 cameraManager.ClearTarget();
                 gameManager.SetObjective("Show the other cow who's the boss");
                 break;
@@ -62,15 +64,19 @@ public class Level1 : LevelManager
 
     private void FixedUpdate()
     {
-        if(patchesEaten > 0)
-        {
-            return;
-        }
         timeWithoutAction += Time.deltaTime;
         if(timeWithoutAction > 20)
         {
-            messageManager.AddMessage("Move close to a patch of grass using W, A, S, D and then pres E to eat it.");
-            timeWithoutAction = 0;
+            if (patchesEaten == 0)
+            {
+                messageManager.AddMessage("Move close to a patch of grass using <color=yellow>W, A, S, D</color> and then pres <color=yellow>E</color> to eat it.");
+                timeWithoutAction = 0;
+            }
+            if (patchesEaten == 3)
+            {
+                messageManager.AddMessage("Stun other cow using <color=yellow>SPACE</color> to charge towards <color=yellow>mouse cursor</color>");
+                timeWithoutAction = 0;
+            }
         }
     }
 }

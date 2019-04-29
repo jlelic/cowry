@@ -6260,26 +6260,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 957627141750832016, guid: 098b325a2e50a7e4796e16884fabf2b5,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.3647059
-      objectReference: {fileID: 0}
-    - target: {fileID: 957627141669553435, guid: 098b325a2e50a7e4796e16884fabf2b5,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.3647059
-      objectReference: {fileID: 0}
-    - target: {fileID: 957627141195264226, guid: 098b325a2e50a7e4796e16884fabf2b5,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.3647059
-      objectReference: {fileID: 0}
-    - target: {fileID: 957627141838740731, guid: 098b325a2e50a7e4796e16884fabf2b5,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.3647059
-      objectReference: {fileID: 0}
     - target: {fileID: 957627141480298673, guid: 098b325a2e50a7e4796e16884fabf2b5,
         type: 3}
       propertyPath: m_IsActive

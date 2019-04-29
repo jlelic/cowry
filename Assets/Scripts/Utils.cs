@@ -36,7 +36,6 @@ public class Utils
 
     public static void PlayAudio(AudioSource source, bool randomPitch = false)
     {
-        Debug.Log("PLAY");
         source.pitch = randomPitch ? UnityEngine.Random.Range(0.75f, 1.5f) : 1;
         source.Play();
     }

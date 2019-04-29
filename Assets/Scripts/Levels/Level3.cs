@@ -67,7 +67,7 @@ public class Level3 : LevelManager
         if(introPlayed && !stage1Completed)
         {
             stage1TimeLeft -= Time.deltaTime;
-            gameManager.SetObjective(string.Format("{0}, Patches remaining: {1}", Utils.ToTimeString(stage1TimeLeft), patchesRemaining));
+            gameManager.SetObjective(string.Format("Patches remaining: {1}\n{0}", Utils.ToTimeString(stage1TimeLeft), patchesRemaining));
         }
     }
 }

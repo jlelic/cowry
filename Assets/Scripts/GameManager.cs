@@ -84,10 +84,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LevelCompletedCleanup(float delay)
     {
+        var lvlNum = SceneManager.GetActiveScene().buildIndex;
         yield return new WaitForSeconds(delay);
-        UiManager.ShowLevelCompletedScreen();
+        UiManager.ShowLevelCompletedScreen(lvlNum);
         yield return new WaitForSeconds(6);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(lvlNum+1);
     }
 
     public void GameOver(string reason = "", float delay = 0f)

@@ -16,7 +16,8 @@ public class DamageTakenHandler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var enemyMovement = collision.collider.GetComponent<MovementManager>();
-        if (enemyMovement!=null && enemyMovement.IsCharging)
+        var cow = collision.collider.GetComponent<CowManager>();
+        if ((enemyMovement!=null && enemyMovement.IsCharging) || (cow != null && cow.Fatness >= 99) )
         {
             OnDamageTaken(collision.contacts[0].point);
         }

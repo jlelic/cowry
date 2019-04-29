@@ -44,6 +44,12 @@ public class AiSuitorController : AbstractCowController
             }
             else
             {
+                if(knocked)
+                {
+                    knocked = false;
+                    StopCoroutine(knockingCoroutine);
+                    knockingCoroutine = null;
+                }
                 TargetVelocity = targetPositon2d - position2d;
             }
         }
