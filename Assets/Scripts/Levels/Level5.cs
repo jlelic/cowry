@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level4 : LevelManager
+public class Level5 : LevelManager
 {
     [SerializeField] private GameObject merchant;
-    private int patchesRemaining = 10;
-    private float stage2TimeLeft = 90;
     float timeElapsed;
     bool introPlayed = false;
     bool stage1Completed = false;
@@ -14,19 +12,16 @@ public class Level4 : LevelManager
     void Start()
     {
         merchant.SetActive(false);
-        messageManager.AddMessage("Time to get fatter! Keep eating grass until your fatness level increases.");
-        messageManager.AddMessage("You can see your fatness level in top left corner.");
-        messageManager.AddMessage("And don't forget to keep out the poor suitors!", "initial");
+        messageManager.AddMessage("You know the drill. Now let's get even fatter!", "initial");
     }
 
     public override void OnFatnessLevelChanged(int level)
     {
-        if(level == 2)
+        if(level == 3)
         {
             stage1Completed = true;
             gameManager.ClearObjective();
-            messageManager.AddMessage("Keep in mind that as you get fatter you're also getting slower!");
-            messageManager.AddMessage("Now wait for a rich suitor to come and protect him until he gets to the door", "protect");
+            messageManager.AddMessage("Great job! You are now so chonky that you won't get stunned if you hit a rock!", "protect");
         }
     }
 
@@ -35,7 +30,7 @@ public class Level4 : LevelManager
         switch (messageId)
         {
             case "initial":
-                gameManager.SetObjective("Get fatter");
+                gameManager.SetObjective("Get even fatter");
                 break;
             case "protect":
                 gameManager.SetObjective("Get gifted to a rich suitor");
@@ -45,11 +40,12 @@ public class Level4 : LevelManager
 
     void FixedUpdate()
     {
+        suitorsSpawnInterval -= Time.deltaTime/30f;
         if (stage1Completed)
         {
             timeElapsed += Time.deltaTime;
         }
-        if(timeElapsed > 20)
+        if(timeElapsed > 10)
         {
             merchant.SetActive(true);
         }

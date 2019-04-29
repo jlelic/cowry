@@ -5163,10 +5163,12 @@ MonoBehaviour:
   playerStunClip: {fileID: 8300000, guid: ff96794cd09eccf47b0d540c1505c13f, type: 3}
   impactClip: {fileID: 8300000, guid: 215ea79e2efeeac47a14fff71e001031, type: 3}
   impactWoodClip: {fileID: 8300000, guid: cb4fde2b1da57c64c9e55ed022d66c9e, type: 3}
+  squeakClip: {fileID: 8300000, guid: e30c6d6e09964004596072339061e005, type: 3}
   impactParticleEffect: {fileID: 7467415455415176854, guid: 26aaf116cce95494d9c1a048bb1f5566,
     type: 3}
   starParticleEffect: {fileID: 8517591176517133559, guid: 9cf1fc286000e2049b3387b5eee1f279,
     type: 3}
+  fatness: 0
 --- !u!95 &1889957902264422909
 Animator:
   serializedVersion: 3

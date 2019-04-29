@@ -17,6 +17,7 @@ public class CowManager : MonoBehaviour
     [SerializeField] private AudioClip playerStunClip;
     [SerializeField] private AudioClip impactClip;
     [SerializeField] private AudioClip impactWoodClip;
+    [SerializeField] private AudioClip squeakClip;
     [SerializeField] private GameObject impactParticleEffect;
     [SerializeField] private GameObject starParticleEffect;
     [SerializeField] private float fatness;
@@ -116,13 +117,23 @@ public class CowManager : MonoBehaviour
 
         if (collision.collider.GetComponent<Rock>() != null)
         {
-            if (isPlayer)
+            if (FatnessLevel == 3)
             {
-                GameManager.Instance.CameraEffect(Color.red);
-                Utils.PlayAudio(audioSource, playerStunClip, false);
+                if (isPlayer)
+                {
+                    Utils.PlayAudio(audioSource, squeakClip, false);
+                }
             }
-            Instantiate(impactParticleEffect, pePosition, Quaternion.identity);
-            StartCoroutine(Stunned());
+            else
+            {
+                if (isPlayer)
+                {
+                    GameManager.Instance.CameraEffect(Color.red);
+                    Utils.PlayAudio(audioSource, playerStunClip, false);
+                }
+                Instantiate(impactParticleEffect, pePosition, Quaternion.identity);
+                StartCoroutine(Stunned());
+            }
         }
         if (collision.collider.GetComponent<MaterialWood>() != null || collision.collider.GetComponent<TilemapCollider2D>() != null)
         {

@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
     public int LevelHalfWidth = 7;
     public int LevelHalfHeight = 4;
     [SerializeField] private float grassSpawnInterval = 10;
-    [SerializeField] private float suitorsSpawnInterval = 1;
+    [SerializeField] protected float suitorsSpawnInterval = 1;
     [SerializeField] private float initialFatness = 1;
     [SerializeField] private float grassFatIncrease = 7;
 
