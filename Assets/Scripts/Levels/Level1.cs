@@ -33,6 +33,8 @@ public class Level1 : LevelManager
         if (patchesEaten == 3)
         {
             gameManager.ClearObjective();
+            aiCow.SetActive(true);
+            cameraManager.SetTarget(aiCow.transform.position);
             messageManager.AddMessage("Oh no! Another cow came here to eat your grass!");
             messageManager.AddMessage("Charge into her to stun her!");
             messageManager.AddMessage("Be careful though, if you hit a big rock while charging you'll be stunned instead!", "chargeIntoCow");
@@ -41,7 +43,7 @@ public class Level1 : LevelManager
 
     public override void OnCowStunned()
     {
-        gameManager.LevelCompleted();
+        gameManager.LevelCompleted(1);
     }
 
     public override void OnMessageCompleted(string messageId)
@@ -52,7 +54,7 @@ public class Level1 : LevelManager
                 gameManager.SetObjective("Eat 3 patches of grass");
                 break;
             case "chargeIntoCow":
-                aiCow.SetActive(true);
+                cameraManager.ClearTarget();
                 gameManager.SetObjective("Show the other cow who's the boss");
                 break;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class CowManager : MonoBehaviour
@@ -24,6 +25,8 @@ public class CowManager : MonoBehaviour
     [SerializeField] private Sprite[] cowBodySprites;
     [SerializeField] private AudioClip playerStunClip;
     [SerializeField] private AudioClip impactClip;
+    [SerializeField] private AudioClip impactWoodClip;
+    [SerializeField] private GameObject impactParticleEffect;
 
     private AbstractCowController cowController;
     private AudioSource audioSource;
@@ -71,15 +74,31 @@ public class CowManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(movement.IsCharging && collision.collider.GetComponent<Rock>() != null)
+        if (!movement.IsCharging)
+        {
+            return;
+        }
+
+        var contactPoint = collision.contacts[0].point;
+        var pePosition = new Vector3(contactPoint.x, contactPoint.y, -3);
+
+        if (collision.collider.GetComponent<Rock>() != null)
         {
             if (isPlayer)
             {
                 GameManager.Instance.CameraEffect(Color.red);
-                audioSource.clip = playerStunClip;
-                audioSource.Play();
+                Utils.PlayAudio(audioSource, playerStunClip, false);
             }
+            Instantiate(impactParticleEffect, pePosition, Quaternion.identity);
             StartCoroutine(Stunned());
+        }
+        if (collision.collider.GetComponent<MaterialWood>() != null || collision.collider.GetComponent<TilemapCollider2D>() != null)
+        {
+            if (isPlayer)
+            {
+                Utils.PlayAudio(audioSource, impactWoodClip, true);
+            }
+            Instantiate(impactParticleEffect, pePosition, Quaternion.identity);
         }
     }
 
@@ -137,8 +156,7 @@ public class CowManager : MonoBehaviour
         {
             GameManager.Instance.LevelManager.OnCowStunned();
         }
-        audioSource.clip = impactClip;
-        audioSource.Play();
+        Utils.PlayAudio(audioSource, impactClip, true);
     }
 
     IEnumerator Stunned()

@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
 
     virtual public void OnRichSuitorKilled()
     {
-        gameManager.GameOver("YOU DESTROYED YOUR ONLY WAY OUT");
+        gameManager.GameOver("YOU DESTROYED YOUR ONLY WAY OUT", 2);
     }
 
     virtual public void OnGrassEaten(bool isPlayer)

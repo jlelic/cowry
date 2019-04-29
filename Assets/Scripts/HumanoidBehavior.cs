@@ -47,7 +47,10 @@ public class HumanoidBehavior : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.03f);
         Time.timeScale = 1f;
         yield return new WaitForSecondsRealtime(0.45f);
-//        Time.timeScale = 0.5f;
+        if (isRich)
+        {
+            Time.timeScale = 0.5f;
+        }
         yield return new WaitForSecondsRealtime(0.5f);
         Time.timeScale = 1f;
     }

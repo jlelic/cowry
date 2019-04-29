@@ -6,6 +6,7 @@ using UnityEngine;
 public class DamageTakenHandler : MonoBehaviour
 {
     private List<Action> listeners = new List<Action>();
+    [SerializeField] private GameObject particleEffect;
 
     public void RegisterListener(Action action)
     {
@@ -17,13 +18,18 @@ public class DamageTakenHandler : MonoBehaviour
         var enemyMovement = collision.collider.GetComponent<MovementManager>();
         if (enemyMovement!=null && enemyMovement.IsCharging)
         {
-            OnDamageTaken();
+            OnDamageTaken(collision.contacts[0].point);
         }
     }
 
-    private void OnDamageTaken()
+    private void OnDamageTaken(Vector3 contactPoint)
     {
-        foreach(var action in listeners)
+        if(particleEffect != null)
+        {
+            var pePosition = new Vector3(contactPoint.x, contactPoint.y, -3);
+            Instantiate(particleEffect, pePosition, Quaternion.identity);
+        }
+        foreach (var action in listeners)
         {
             action();
         }

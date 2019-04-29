@@ -5162,6 +5162,9 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 78524a1d6c40ee640804357f97e754b9, type: 3}
   playerStunClip: {fileID: 8300000, guid: ff96794cd09eccf47b0d540c1505c13f, type: 3}
   impactClip: {fileID: 8300000, guid: 215ea79e2efeeac47a14fff71e001031, type: 3}
+  impactWoodClip: {fileID: 8300000, guid: cb4fde2b1da57c64c9e55ed022d66c9e, type: 3}
+  impactParticleEffect: {fileID: 7467415455415176854, guid: 26aaf116cce95494d9c1a048bb1f5566,
+    type: 3}
 --- !u!95 &1889957902264422909
 Animator:
   serializedVersion: 3
@@ -5211,6 +5214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d4c801d31847d43a32d49dd427428a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleEffect: {fileID: 7467415455415176854, guid: 26aaf116cce95494d9c1a048bb1f5566,
+    type: 3}
 --- !u!82 &6224301558102918000
 AudioSource:
   m_ObjectHideFlags: 0
