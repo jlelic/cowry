@@ -12,7 +12,7 @@ public class Level5 : LevelManager
     void Start()
     {
         merchant.SetActive(false);
-        messageManager.AddMessage("You know the drill. Now let's get even fatter!", "initial");
+        messageManager.AddMessage("You know the drill, now let's get even fatter! Be quick though because number of poor suitors coming will increase over time!", "initial");
     }
 
     public override void OnFatnessLevelChanged(int level)

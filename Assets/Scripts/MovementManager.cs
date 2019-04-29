@@ -31,11 +31,11 @@ public class MovementManager : MonoBehaviour
     void FixedUpdate()
     {
         var scale = transform.localScale;
-        if (rigidBody.velocity.x > 0)
+        if (rigidBody.velocity.x > 0.08f)
         {
             transform.localScale = new Vector3(-Mathf.Abs(scale.x), scale.y, scale.z);
         }
-        if (rigidBody.velocity.x < 0)
+        if (rigidBody.velocity.x < 0.08f)
         {
             transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
         }

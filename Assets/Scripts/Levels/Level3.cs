@@ -45,7 +45,7 @@ public class Level3 : LevelManager
                 break;
             case "protect":
                 cameraManager.ClearTarget();
-                gameManager.SetObjective("Let merchant get to the door first");
+                gameManager.SetObjective("Let the merchant get to the door first");
                 break;
         }
     }
