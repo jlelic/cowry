@@ -131,6 +131,11 @@ public class GameManager : MonoBehaviour
         UiManager.ClearObjective();
     }
 
+    public void CameraEffect(Color color)
+    {
+        UiManager.CameraEffect(color);
+    }
+
     IEnumerator StartSpawnSuitors()
     {
         while(true)

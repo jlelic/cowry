@@ -75,6 +75,7 @@ public class CowManager : MonoBehaviour
         {
             if (isPlayer)
             {
+                GameManager.Instance.CameraEffect(Color.red);
                 audioSource.clip = playerStunClip;
                 audioSource.Play();
             }

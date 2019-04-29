@@ -40,7 +40,7 @@ public class CameraManager : MonoBehaviour
                 targetViewPosition.y,
                 transform.position.z
             ),
-            0.2f
+            0.07f
         );
     }
 }

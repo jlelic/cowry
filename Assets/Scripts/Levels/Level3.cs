@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Level3 : LevelManager
 {
-    [SerializeField] private int patchesRemaining = 10;
-    [SerializeField] private float stage1TimeLeft = 90;
     [SerializeField] private GameObject merchant;
+    private int patchesRemaining = 10;
+    private float stage1TimeLeft = 90;
     float timeElapsed;
     bool introPlayed = false;
     bool stage1Completed = false;

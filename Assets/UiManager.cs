@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     readonly Color Transparent = new Color(0, 0, 0, 0);
 
     [SerializeField] private Image overlayPanel;
+    [SerializeField] private Image cameraEffect;
     [SerializeField] private Text endLevelTitleText;
     [SerializeField] private Text endLevelReasonText;
     [SerializeField] private Text multiKillText;
@@ -112,5 +113,12 @@ public class UiManager : MonoBehaviour
     public void ClearObjective()
     {
         objectiveText.text = "";
+    }
+    
+    public void CameraEffect(Color color)
+    {
+        var effectColor = new Color(color.r, color.g, color.b, 0.2f);
+        cameraEffect.color = effectColor;
+        Utils.tweenColor(cameraEffect, Transparent, 0.15f);
     }
 }
