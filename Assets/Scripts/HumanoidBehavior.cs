@@ -20,7 +20,7 @@ public class HumanoidBehavior : MonoBehaviour
     {
         StartCoroutine(DamageTakenSlowMo());
         GameManager.Instance.CameraEffect(Color.white);
-        Utils.PlayAudio(GetComponent<AudioSource>(), hitClip);
+        Utils.PlayAudio(GetComponent<AudioSource>(), hitClip, true);
         Die();
     }
 

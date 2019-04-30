@@ -2926,7 +2926,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1581502150
 PrefabInstance:
@@ -6652,7 +6652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelHalfWidth: 10
   LevelHalfHeight: 7
-  grassSpawnInterval: 5
+  grassSpawnInterval: 4
   suitorsSpawnInterval: 8
   initialFatness: 36
   grassFatIncrease: 3

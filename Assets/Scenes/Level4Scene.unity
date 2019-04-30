@@ -6501,8 +6501,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelHalfWidth: 10
   LevelHalfHeight: 7
-  grassSpawnInterval: 6
-  suitorsSpawnInterval: 5.5
+  grassSpawnInterval: 5
+  suitorsSpawnInterval: 4.5
   initialFatness: 31
   grassFatIncrease: 2
   merchant: {fileID: 32631457}
