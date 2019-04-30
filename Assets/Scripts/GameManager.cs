@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompleted(float delay = 0)
     {
-        if (!IsPlaying || !CanEndGame)
+        if (!IsPlaying)
         {
             return;
         }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(string reason = "", float delay = 0f)
     {
-        if(!IsPlaying || !CanEndGame)
+        if(!IsPlaying)
         {
             return;
         }
