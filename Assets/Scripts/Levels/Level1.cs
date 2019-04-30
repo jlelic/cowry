@@ -27,7 +27,7 @@ public class Level1 : LevelManager
         if (patchesEaten == 2)
         {
             gameManager.SetObjective("Eat 1 last patch of grass");
-            messageManager.AddMessage("You can use <color=yellow>SPACE</color> to charge towards <color=yellow>mouse cursor</color>");
+            messageManager.AddMessage("You can use <color=yellow>SPACE</color> or <color=yellow>mouse click</color> to charge towards <color=yellow>mouse cursor</color>");
             messageManager.AddMessage("That way you can move faster or even deal damage to whatever you hit!");
         }
         if (patchesEaten == 3)
@@ -74,7 +74,7 @@ public class Level1 : LevelManager
             }
             if (patchesEaten == 3)
             {
-                messageManager.AddMessage("Stun other cow using <color=yellow>SPACE</color> to charge towards <color=yellow>mouse cursor</color>");
+                messageManager.AddMessage("Stun other cow using <color=yellow>SPACE</color> or <color=yellow>mouse click</color> to charge towards <color=yellow>mouse cursor</color>");
                 timeWithoutAction = 0;
             }
         }

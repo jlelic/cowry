@@ -34,7 +34,7 @@ public class PlayerController : AbstractCowController
             pressedEat = false;
         }
 
-        if (Input.GetAxisRaw("Charge") > 0)
+        if (Input.GetAxisRaw("Charge") > 0 || Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2))
         {
             Charge = !pressedCharge;
             pressedCharge = true;

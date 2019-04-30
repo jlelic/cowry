@@ -21,6 +21,10 @@ public class AiSuitorController : AbstractCowController
 
     override protected void FixedUpdate()
     {
+        if(!GameManager.Instance.IsPlaying)
+        {
+            return;
+        }
         position2d = Utils.V3toV2(transform.position);
 
         if(targetPoint != null)
@@ -44,13 +48,14 @@ public class AiSuitorController : AbstractCowController
             }
             else
             {
-                if(knocked)
+                TargetVelocity = targetPositon2d - position2d;
+                if (knocked && Vector2.Distance(position2d, targetPositon2d) > 0.6f)
                 {
                     knocked = false;
                     StopCoroutine(knockingCoroutine);
                     knockingCoroutine = null;
                 }
-                TargetVelocity = targetPositon2d - position2d;
+
             }
         }
         else

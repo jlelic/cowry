@@ -11,7 +11,8 @@ public class FatnessBar : MonoBehaviour
     private Coroutine glowingCoroutine;
     private RectTransform rectTransform;
     [SerializeField] private Color[] barColors;
-    [SerializeField] private int glowLimit = 99;
+
+    private int glowLimit = 99;
 
     void Awake()
     {
